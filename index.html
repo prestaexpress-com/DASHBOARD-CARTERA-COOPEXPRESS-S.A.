@@ -22,15 +22,9 @@
 
   /* ── HEADER ── */
   header{background:#283551;position:relative;overflow:hidden;}
-  .header-inner{display:flex;align-items:center;justify-content:space-between;padding:26px 48px 22px;position:relative;z-index:2;}
-  .header-stripe{position:absolute;bottom:0;left:0;right:0;height:5px;background:linear-gradient(90deg,var(--olive) 0%,var(--lime) 60%,var(--olive) 100%);}
-  .logo-area{background:var(--olive);padding:6px 18px 6px 0;border-radius:6px;}
-  .logo-name{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:2.6rem;color:var(--navy);letter-spacing:3px;text-transform:uppercase;line-height:1;}
-  .logo-name span{color:#000;}
-  .logo-sub{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.82rem;color:var(--navy);letter-spacing:5px;text-transform:uppercase;margin-top:2px;}
-  .header-title{text-align:right;}
-  .header-title h1{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:2.4rem;color:#fff;text-transform:uppercase;letter-spacing:2px;line-height:1.1;}
-  .header-title .period{font-size:0.75rem;color:var(--lime);letter-spacing:4px;text-transform:uppercase;margin-top:4px;}
+  .header-inner{display:flex;align-items:center;justify-content:space-between;padding:20px 48px;position:relative;z-index:2;}
+  .header-title h1{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.8rem;color:#f39519;text-transform:uppercase;letter-spacing:3px;line-height:1;margin:0;}
+  .header-buttons{display:flex;gap:12px;align-items:center;flex-wrap:wrap;}
 
   /* ── KPI STRIP ── */
   .kpi-strip{background:var(--bg);display:flex;gap:16px;padding:20px 38px;border-bottom:1px solid rgba(255,255,255,0.08);}
@@ -55,7 +49,7 @@
   .kpi-accent{display:none;}
 
   /* ── PAGE NAVIGATION ── */
-  .page-nav-btn{background:rgba(255,255,255,0.08);border:2px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.75);padding:8px 22px;border-radius:8px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.85rem;cursor:pointer;transition:all 0.2s;letter-spacing:1px;text-transform:uppercase;margin-left:20px;}
+  .page-nav-btn{background:rgba(255,255,255,0.08);border:2px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.75);padding:8px 22px;border-radius:8px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.85rem;cursor:pointer;transition:all 0.2s;letter-spacing:1px;text-transform:uppercase;}
   .page-nav-btn.active,.page-nav-btn:hover{background:var(--olive);color:#fff;border-color:var(--olive);}
   .page-view{display:none;}
   .page-view.active{display:block;}
@@ -70,6 +64,9 @@
   .card:nth-child(1){animation-delay:.05s}.card:nth-child(2){animation-delay:.10s}.card:nth-child(3){animation-delay:.15s}
   .card:nth-child(4){animation-delay:.20s}.card:nth-child(5){animation-delay:.25s}.card:nth-child(6){animation-delay:.30s}
   .card:nth-child(7){animation-delay:.35s}.card:nth-child(8){animation-delay:.40s}
+  
+  /* Cards en página 2 sin límite de ancho */
+  #page2 .card{max-width:none;}
 
   /* CARD HEADER oscuro */
   .card-header{background:transparent;margin:0;padding:10px 16px 9px;border-radius:0;}
@@ -194,17 +191,14 @@
   /* ── FOOTER ── */
   footer{background:var(--card);text-align:center;padding:12px;font-size:0.68rem;color:#8fa8bc;letter-spacing:2px;text-transform:uppercase;border-top:2px solid var(--olive);}
   /* ── FILTER BUTTONS ── */
-  .filter-btn,.filter-btn-pct,.filter-btn-genero,.filter-btn-segmento,.filter-btn-tasa,.filter-btn-avaluo,.filter-btn-avaluopend,.filter-btn-depto,.filter-btn-rango{background:rgba(40,53,81,0.05);border:2px solid rgba(40,53,81,0.25);color:#283551;padding:8px 22px;border-radius:8px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.85rem;cursor:pointer;transition:all 0.2s;letter-spacing:1px;text-transform:uppercase;}
-  .filter-btn:hover,.filter-btn-pct:hover,.filter-btn-genero:hover,.filter-btn-segmento:hover,.filter-btn-tasa:hover,.filter-btn-avaluo:hover,.filter-btn-avaluopend:hover,.filter-btn-depto:hover,.filter-btn-rango:hover{background:#f39519;color:#fff;border-color:#f39519;}
+  .filter-btn,.filter-btn-pct,.filter-btn-genero,.filter-btn-segmento,.filter-btn-tasa,.filter-btn-avaluo,.filter-btn-avaluopend,.filter-btn-depto,.filter-btn-rango{background:#3d505f;border:2px solid #3d505f;color:#fff;padding:8px 22px;border-radius:8px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.85rem;cursor:pointer;transition:all 0.2s;letter-spacing:1px;text-transform:uppercase;}
+  .filter-btn:hover,.filter-btn-pct:hover,.filter-btn-genero:hover,.filter-btn-segmento:hover,.filter-btn-tasa:hover,.filter-btn-avaluo:hover,.filter-btn-avaluopend:hover,.filter-btn-depto:hover,.filter-btn-rango:hover{background:#4a6070;color:#fff;border-color:#4a6070;}
   .filter-btn.active,.filter-btn-pct.active,.filter-btn-genero.active,.filter-btn-segmento.active,.filter-btn-tasa.active,.filter-btn-avaluo.active,.filter-btn-avaluopend.active,.filter-btn-depto.active,.filter-btn-rango.active{background:#f39519;color:#fff;border-color:#f39519;}
 
-  /* ── GLOBAL FILTER ── */
-  .global-filter-wrap{background:#283551;padding:16px 38px;border-bottom:3px solid var(--lime);}
-  .global-filter-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.9rem;color:#c1db02;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;}
-  .global-filter-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
-  .global-filter-btn{background:rgba(255,255,255,0.1);border:2px solid rgba(193,219,2,0.3);color:#fff;padding:10px 28px;border-radius:8px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.9rem;cursor:pointer;transition:all 0.2s;letter-spacing:1.5px;text-transform:uppercase;position:relative;}
-  .global-filter-btn:hover{background:rgba(193,219,2,0.2);border-color:#c1db02;transform:translateY(-2px);}
-  .global-filter-btn.selected{background:#c1db02;color:#283551;border-color:#c1db02;box-shadow:0 4px 12px rgba(193,219,2,0.4);}
+  /* ── BOTONES DEL HEADER (FILTROS Y NAVEGACIÓN) ── */
+  .global-filter-btn{background:#3d505f;border:2px solid #3d505f;color:#fff;padding:8px 22px;border-radius:8px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.85rem;cursor:pointer;transition:all 0.2s;letter-spacing:1px;text-transform:uppercase;}
+  .global-filter-btn:hover{background:#4a6070;border-color:#4a6070;}
+  .global-filter-btn.selected{background:#f39519;color:#fff;border-color:#f39519;}
 
   /* ── RESPONSIVE DESIGN ── */
   /* Tablets (max-width: 1024px) */
@@ -353,39 +347,29 @@
 
 <header>
   <div class="header-inner">
-    <div style="display:inline-block;">
-      <img src="https://i.ibb.co/gMbncZQF/Designer-2.png" alt="COOPEXPRESS" style="height:72px;width:auto;display:block;object-fit:contain;">
-    </div>
     <div class="header-title">
-      <h1>Dashboard de Cartera en Mora</h1>
-      <div class="period">Diciembre 2025 → Febrero 2026 </div>
+      <h1>DASHBOARD CARTERA EN MORA</h1>
     </div>
-    <div style="display:flex;gap:10px;align-items:center;">
+    <div class="header-buttons">
+      <button class="global-filter-btn" data-month="diciembre">DIC 2025</button>
+      <button class="global-filter-btn selected" data-month="enero">ENE 2026</button>
+      <button class="global-filter-btn" data-month="febrero">FEB 2026</button>
+      <button class="global-filter-btn" data-month="todos">TODOS</button>
       <button class="page-nav-btn active" onclick="switchPage(1)">PÁGINA 1</button>
       <button class="page-nav-btn" onclick="switchPage(2)">PÁGINA 2</button>
     </div>
   </div>
-  <div class="header-stripe"></div>
 </header>
-
-<!-- GLOBAL FILTER -->
-<div class="global-filter-wrap">
-  <div class="global-filter-btns">
-    <button class="global-filter-btn" data-month="diciembre">DIC 2025</button>
-    <button class="global-filter-btn selected" data-month="enero">ENE 2026</button>
-    <button class="global-filter-btn" data-month="febrero">FEB 2026</button>
-  </div>
-</div>
 
 <!-- PAGE 1 - Main Dashboard -->
 <div class="page-view active" id="page1">
 
 <div class="kpi-strip">
-  <div class="kpi-item"><div class="kpi-top-bar"></div><div class="kpi-label">Capital Total Enero 2026</div><div class="kpi-value">Q 27,757,024</div><div class="kpi-sub">+5.7% vs mes anterior</div></div>
-  <div class="kpi-item"><div class="kpi-top-bar"></div><div class="kpi-label">Casos Activos</div><div class="kpi-value">307 <span>casos</span></div><div class="kpi-sub">Cartera en mora activa</div></div>
-  <div class="kpi-item"><div class="kpi-top-bar"></div><div class="kpi-label">Vigentes en Mora</div><div class="kpi-value">215 <span>75.7%</span></div><div class="kpi-sub">Del total de casos</div></div>
-  <div class="kpi-item"><div class="kpi-top-bar"></div><div class="kpi-label">Destino Principal</div><div class="kpi-value">Consumo <span>57.3%</span></div><div class="kpi-sub">196 casos · Q 15,894,570</div></div>
-  <div class="kpi-item"><div class="kpi-top-bar"></div><div class="kpi-label">Segmento Dominante</div><div class="kpi-value">(en blanco) <span>48.6%</span></div><div class="kpi-sub">150 casos · mayor participación</div></div>
+  <div class="kpi-item"><div class="kpi-top-bar"></div><div class="kpi-label" id="kpiCapitalLabel">Capital Total Enero 2026</div><div class="kpi-value" id="kpiCapitalValue">Q 27,757,024</div><div class="kpi-sub" id="kpiCapitalSub">+5.7% vs mes anterior</div></div>
+  <div class="kpi-item"><div class="kpi-top-bar"></div><div class="kpi-label">Casos Activos</div><div class="kpi-value" id="kpiCasosValue">307 <span>casos</span></div><div class="kpi-sub">Cartera en mora activa</div></div>
+  <div class="kpi-item"><div class="kpi-top-bar"></div><div class="kpi-label">Vigentes en Mora</div><div class="kpi-value" id="kpiVigentesValue">215 <span id="kpiVigentesPct">75.7%</span></div><div class="kpi-sub">Del total de casos</div></div>
+  <div class="kpi-item"><div class="kpi-top-bar"></div><div class="kpi-label">Destino Principal</div><div class="kpi-value" id="kpiDestinoValue">Consumo <span id="kpiDestinoPct">57.3%</span></div><div class="kpi-sub" id="kpiDestinoSub">196 casos · Q 15,894,570</div></div>
+  <div class="kpi-item"><div class="kpi-top-bar"></div><div class="kpi-label">Segmento Dominante</div><div class="kpi-value" id="kpiSegmentoValue">(en blanco) <span id="kpiSegmentoPct">48.6%</span></div><div class="kpi-sub" id="kpiSegmentoSub">150 casos · mayor participación</div></div>
 </div>
 
 <main>
@@ -654,7 +638,7 @@
 <main>
 
 <!-- Cartera por Departamento -->
-<div class="card g-col-4">
+<div class="card g-col-6">
   <div class="card-header">
     <div class="card-title">Cartera por Departamento</div>
     <div class="card-desc">Distribución de casos en mora por ubicación geográfica</div>
@@ -752,7 +736,7 @@
 </div>
 
 <!-- Cartera por Rango vs Departamento -->
-<div class="card g-col-8">
+<div class="card g-col-6">
   <div class="card-header" style="padding:6px 12px;">
     <div class="card-title" style="font-size:0.95rem;">Cartera por Rango vs Departamento</div>
     <div class="card-desc" style="font-size:0.68rem;margin-top:2px;">Distribución porcentual de casos en mora por rango de días y ubicación geográfica</div>
@@ -1668,6 +1652,99 @@ document.querySelectorAll('.filter-btn-depto').forEach(btn=>{
   });
 });
 
+// ── DATOS DE KPIs POR MES ──
+const kpiData = {
+  diciembre: {
+    capitalLabel: 'Capital Total Diciembre 2025',
+    capital: 'Q 26,256,180',
+    capitalSub: 'Mes base',
+    casos: '294',
+    vigentes: '205',
+    vigentesPct: '69.7%',
+    destino: 'Consumo',
+    destinoPct: '55.8%',
+    destinoSub: '182 casos · Q 14,645,022',
+    segmento: '(en blanco)',
+    segmentoPct: '46.3%',
+    segmentoSub: '136 casos · mayor participación'
+  },
+  enero: {
+    capitalLabel: 'Capital Total Enero 2026',
+    capital: 'Q 27,757,024',
+    capitalSub: '+5.7% vs mes anterior',
+    casos: '307',
+    vigentes: '215',
+    vigentesPct: '75.7%',
+    destino: 'Consumo',
+    destinoPct: '57.3%',
+    destinoSub: '196 casos · Q 15,894,570',
+    segmento: '(en blanco)',
+    segmentoPct: '48.6%',
+    segmentoSub: '150 casos · mayor participación'
+  },
+  febrero: {
+    capitalLabel: 'Capital Total Febrero 2026',
+    capital: 'Q 29,102,345',
+    capitalSub: '+4.8% vs mes anterior',
+    casos: '318',
+    vigentes: '226',
+    vigentesPct: '71.1%',
+    destino: 'Consumo',
+    destinoPct: '58.5%',
+    destinoSub: '204 casos · Q 17,024,812',
+    segmento: '(en blanco)',
+    segmentoPct: '50.3%',
+    segmentoSub: '160 casos · mayor participación'
+  },
+  todos: {
+    capitalLabel: 'Capital Total Acumulado',
+    capital: 'Q 83,115,549',
+    capitalSub: 'Diciembre 2025 → Febrero 2026',
+    casos: '919',
+    vigentes: '646',
+    vigentesPct: '70.3%',
+    destino: 'Consumo',
+    destinoPct: '57.2%',
+    destinoSub: '582 casos · Q 47,564,404',
+    segmento: '(en blanco)',
+    segmentoPct: '48.4%',
+    segmentoSub: '446 casos · mayor participación'
+  }
+};
+
+// ── ACTUALIZAR KPIs SEGÚN FILTRO GLOBAL ──
+function updateKPIs(selectedMonths) {
+  let data;
+  
+  if (selectedMonths.includes('todos')) {
+    // Modo TODOS: mostrar datos acumulados
+    data = kpiData.todos;
+  } else if (selectedMonths.length === 1) {
+    // Un solo mes seleccionado
+    data = kpiData[selectedMonths[0]];
+  } else if (selectedMonths.length === 2) {
+    // Dos meses seleccionados: mostrar el más reciente
+    const monthOrder = ['diciembre', 'enero', 'febrero'];
+    const sortedMonths = selectedMonths.sort((a, b) => monthOrder.indexOf(a) - monthOrder.indexOf(b));
+    data = kpiData[sortedMonths[sortedMonths.length - 1]];
+  }
+  
+  if (data) {
+    document.getElementById('kpiCapitalLabel').textContent = data.capitalLabel;
+    document.getElementById('kpiCapitalValue').textContent = data.capital;
+    document.getElementById('kpiCapitalSub').textContent = data.capitalSub;
+    document.getElementById('kpiCasosValue').innerHTML = data.casos + ' <span>casos</span>';
+    document.getElementById('kpiVigentesValue').textContent = data.vigentes + ' ';
+    document.getElementById('kpiVigentesPct').textContent = data.vigentesPct;
+    document.getElementById('kpiDestinoValue').textContent = data.destino + ' ';
+    document.getElementById('kpiDestinoPct').textContent = data.destinoPct;
+    document.getElementById('kpiDestinoSub').textContent = data.destinoSub;
+    document.getElementById('kpiSegmentoValue').textContent = data.segmento + ' ';
+    document.getElementById('kpiSegmentoPct').textContent = data.segmentoPct;
+    document.getElementById('kpiSegmentoSub').textContent = data.segmentoSub;
+  }
+}
+
 // ── GLOBAL FILTER CON MULTI-SELECT ──
 let globalSelectedMonths = ['enero']; // Por defecto enero seleccionado
 
@@ -1683,8 +1760,16 @@ function updateGlobalFilter() {
     }
   });
   
+  // Si "todos" está seleccionado, activar filtro "todos" en todos los gráficos
+  if (months.includes('todos')) {
+    document.querySelectorAll('.filter-btn, .filter-btn-pct, .filter-btn-segmento, .filter-btn-tasa, .filter-btn-avaluo, .filter-btn-avaluopend, .filter-btn-depto, .filter-btn-rango').forEach(btn => {
+      if (btn.dataset.filter === 'todos') {
+        btn.click();
+      }
+    });
+  }
   // Si solo 1 mes seleccionado, activar ese filtro en todos los gráficos
-  if (months.length === 1) {
+  else if (months.length === 1) {
     const month = months[0];
     // Activar filtros individuales
     document.querySelectorAll('.filter-btn, .filter-btn-pct, .filter-btn-segmento, .filter-btn-tasa, .filter-btn-avaluo, .filter-btn-avaluopend, .filter-btn-depto, .filter-btn-rango').forEach(btn => {
@@ -1750,14 +1835,25 @@ function updateGlobalFilter() {
       rangoPctChart.update();
     }
   }
+  
+  // Actualizar KPIs con los meses seleccionados
+  updateKPIs(months);
 }
 
 document.querySelectorAll('.global-filter-btn').forEach(btn => {
   btn.addEventListener('click', function() {
     const month = this.dataset.month;
     
-    // Toggle selección
-    if (globalSelectedMonths.includes(month)) {
+    // Si se selecciona "todos", hacerlo exclusivo
+    if (month === 'todos') {
+      globalSelectedMonths = ['todos'];
+    }
+    // Si hay "todos" seleccionado y se hace click en otro mes, quitar "todos"
+    else if (globalSelectedMonths.includes('todos')) {
+      globalSelectedMonths = [month];
+    }
+    // Toggle selección normal para meses regulares
+    else if (globalSelectedMonths.includes(month)) {
       // Si ya está seleccionado, remover (pero solo si hay más de 1 seleccionado)
       if (globalSelectedMonths.length > 1) {
         globalSelectedMonths = globalSelectedMonths.filter(m => m !== month);
