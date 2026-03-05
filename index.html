@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -7,9 +8,10 @@
 <title>Dashboard Cartera – COOPEXPRESS S.A.</title>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700;800&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js"></script>
 <style>
   :root {
-    --bg:#ffffff; --card:#3d505f; --card2:#2e3f4d;
+    --bg:#ffffff; --card:#283551; --card2:#0f1d2e;
     --text-dark:#535353; --text-light:#ffffff;
     --orange:#fe4100; --olive:#99b01e; --lime:#c1db02;
     --navy:#283551; --black:#000;
@@ -19,7 +21,7 @@
   body{background:var(--bg);font-family:'Barlow',sans-serif;color:var(--text-dark);min-height:100vh;}
 
   /* ── HEADER ── */
-  header{background:var(--black);position:relative;overflow:hidden;}
+  header{background:#283551;position:relative;overflow:hidden;}
   .header-inner{display:flex;align-items:center;justify-content:space-between;padding:26px 48px 22px;position:relative;z-index:2;}
   .header-stripe{position:absolute;bottom:0;left:0;right:0;height:5px;background:linear-gradient(90deg,var(--olive) 0%,var(--lime) 60%,var(--olive) 100%);}
   .logo-area{background:var(--olive);padding:6px 18px 6px 0;border-radius:6px;}
@@ -31,31 +33,38 @@
   .header-title .period{font-size:0.75rem;color:var(--lime);letter-spacing:4px;text-transform:uppercase;margin-top:4px;}
 
   /* ── KPI STRIP ── */
-  .kpi-strip{background:var(--bg);display:flex;gap:16px;padding:20px 38px;border-bottom:1px solid #e8edf2;}
-  .kpi-item{flex:1;background:#fff;border-radius:12px;padding:18px 20px 16px;border:1px solid #e2e8f0;box-shadow:0 2px 8px rgba(0,0,0,0.06);position:relative;overflow:hidden;}
-  .kpi-item:last-child{border-right:1px solid #e2e8f0;}
+  .kpi-strip{background:var(--bg);display:flex;gap:16px;padding:20px 38px;border-bottom:1px solid rgba(255,255,255,0.08);}
+  .kpi-item{flex:1;background:#ffffff;border-radius:12px;padding:18px 20px 16px;border:1px solid rgba(40,53,81,0.15);box-shadow:0 4px 12px rgba(0,0,0,0.1);position:relative;overflow:hidden;transition:all 0.3s ease;}
+  .kpi-item:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.15);border-color:rgba(193,219,2,0.3);}
+  .kpi-item:last-child{border-right:1px solid rgba(40,53,81,0.15);}
   .kpi-top-bar{position:absolute;top:0;left:0;right:0;height:4px;border-radius:12px 12px 0 0;}
-  .kpi-item:nth-child(1) .kpi-top-bar{background:var(--olive);}
-  .kpi-item:nth-child(2) .kpi-top-bar{background:var(--navy);}
-  .kpi-item:nth-child(3) .kpi-top-bar{background:var(--lime);}
-  .kpi-item:nth-child(4) .kpi-top-bar{background:var(--orange);}
-  .kpi-item:nth-child(5) .kpi-top-bar{background:#2eccc5;}
-  .kpi-label{font-size:0.68rem;letter-spacing:2.5px;text-transform:uppercase;color:#5a6a80;margin-bottom:6px;font-weight:600;}
-  .kpi-value{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:2.2rem;line-height:1;color:var(--navy);}
-  .kpi-item:nth-child(1) .kpi-value{color:var(--olive);}
-  .kpi-item:nth-child(2) .kpi-value{color:var(--navy);}
-  .kpi-item:nth-child(3) .kpi-value{color:var(--lime);}
-  .kpi-item:nth-child(4) .kpi-value{color:var(--orange);}
-  .kpi-item:nth-child(5) .kpi-value{color:#2eccc5;}
-  .kpi-value span{font-size:1rem;font-weight:500;color:#5a6a80;margin-left:5px;font-family:'Barlow',sans-serif;}
-  .kpi-sub{font-size:0.74rem;color:#6a7a90;margin-top:5px;font-weight:400;}
+  .kpi-item:nth-child(1) .kpi-top-bar{background:linear-gradient(90deg,var(--olive),#a8c226);}
+  .kpi-item:nth-child(2) .kpi-top-bar{background:linear-gradient(90deg,#5271ff,#7b8fff);}
+  .kpi-item:nth-child(3) .kpi-top-bar{background:linear-gradient(90deg,var(--lime),#d4e157);}
+  .kpi-item:nth-child(4) .kpi-top-bar{background:linear-gradient(90deg,var(--orange),#ffad42);}
+  .kpi-item:nth-child(5) .kpi-top-bar{background:linear-gradient(90deg,#2eccc5,#4dd8d1);}
+  .kpi-label{font-size:0.68rem;letter-spacing:2.5px;text-transform:uppercase;color:rgba(40,53,81,0.65);margin-bottom:6px;font-weight:600;}
+  .kpi-value{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:2.2rem;line-height:1;color:#283551;}
+  .kpi-item:nth-child(1) .kpi-value{color:#8f9e03;}
+  .kpi-item:nth-child(2) .kpi-value{color:#5271ff;}
+  .kpi-item:nth-child(3) .kpi-value{color:#a8c226;}
+  .kpi-item:nth-child(4) .kpi-value{color:#ff6b35;}
+  .kpi-item:nth-child(5) .kpi-value{color:#1eaea5;}
+  .kpi-value span{font-size:1rem;font-weight:500;color:rgba(40,53,81,0.55);margin-left:5px;font-family:'Barlow',sans-serif;}
+  .kpi-sub{font-size:0.74rem;color:rgba(40,53,81,0.6);margin-top:5px;font-weight:400;}
   .kpi-accent{display:none;}
+
+  /* ── PAGE NAVIGATION ── */
+  .page-nav-btn{background:rgba(255,255,255,0.08);border:2px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.75);padding:8px 22px;border-radius:8px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.85rem;cursor:pointer;transition:all 0.2s;letter-spacing:1px;text-transform:uppercase;margin-left:20px;}
+  .page-nav-btn.active,.page-nav-btn:hover{background:var(--olive);color:#fff;border-color:var(--olive);}
+  .page-view{display:none;}
+  .page-view.active{display:block;}
 
   /* ── MAIN GRID ── */
   main{padding:32px 38px 44px;display:grid;grid-template-columns:repeat(12,1fr);gap:20px;}
 
   /* ── CARD ── */
-  .card{background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);display:flex;flex-direction:column;position:relative;overflow:hidden;animation:fadeUp 0.5s ease both;}
+  .card{background:#ffffff;border-radius:var(--r);box-shadow:var(--shadow);display:flex;flex-direction:column;position:relative;overflow:hidden;animation:fadeUp 0.5s ease both;border:2px solid #c1db02;max-width:500px;margin:0 auto;}
   .card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--olive),var(--lime));border-radius:var(--r) var(--r) 0 0;}
   @keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
   .card:nth-child(1){animation-delay:.05s}.card:nth-child(2){animation-delay:.10s}.card:nth-child(3){animation-delay:.15s}
@@ -63,83 +72,280 @@
   .card:nth-child(7){animation-delay:.35s}.card:nth-child(8){animation-delay:.40s}
 
   /* CARD HEADER oscuro */
-  .card-header{background:rgba(0,0,0,0.25);margin:0;padding:10px 16px 9px;border-radius:0;}
+  .card-header{background:transparent;margin:0;padding:10px 16px 9px;border-radius:0;}
   .card::before{border-radius:var(--r) var(--r) 0 0;}
   .card-header:first-of-type{margin-top:3px;}
-  .card-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.1rem;color:#fff;text-transform:uppercase;letter-spacing:1px;line-height:1.2;}
-  .card-desc{font-size:0.72rem;color:#9ab8c8;margin-top:2px;line-height:1.35;}
+  .card-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.05rem;color:#283551;text-transform:uppercase;letter-spacing:1.2px;line-height:1.2;}
+  .card-desc{font-size:0.64rem;color:#5a6c7d;margin-top:2px;line-height:1.35;text-transform:uppercase;letter-spacing:0.8px;}
   .card-body{flex:1;padding:14px 16px 14px;display:flex;flex-direction:column;}
   .chart-wrap{flex:1;position:relative;min-height:190px;}
 
   .g-col-6{grid-column:span 6}.g-col-4{grid-column:span 4}.g-col-8{grid-column:span 8}.g-col-12{grid-column:span 12}
 
-  /* ── GÉNERO ── */
+  /* ── GENDER ── */
   .gender-wrap{display:flex;gap:10px;flex:1;align-items:stretch;}
   .gender-panel{flex:1;min-width:0;border-radius:10px;padding:20px 10px 14px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:10px;position:relative;}
-  .gender-panel.fem{background:rgba(193,219,2,0.25);border:1.5px solid rgba(193,219,2,0.5);}
-  .gender-panel.mas{background:rgba(10,15,25,0.85);border:1.5px solid rgba(40,53,81,0.7);}
+  .gender-panel.fem{background:rgba(193,219,2,0.15);border:1.5px solid rgba(193,219,2,0.6);}
+  .gender-panel.mas{background:rgba(46,134,222,0.15);border:1.5px solid rgba(46,134,222,0.6);}
   .gender-panel img{flex-shrink:0;}
   .gender-icon{width:72px;height:126px;display:block;}
   .gender-tag{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.72rem;letter-spacing:3px;text-transform:uppercase;}
-  .gender-panel.fem .gender-tag{color:#c1db02;}
-  .gender-panel.mas .gender-tag{color:#6e9bcc;}
+  .gender-panel.fem .gender-tag{color:#d4e157;}
+  .gender-panel.mas .gender-tag{color:#5dade2;}
   .gender-pct{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:2.3rem;line-height:1;}
-  .gender-panel.fem .gender-pct{color:#c1db02;}
-  .gender-panel.mas .gender-pct{color:#6e9bcc;}
-  .gender-sep{width:100%;height:1px;background:rgba(255,255,255,0.1);}
+  .gender-panel.fem .gender-pct{color:#d4e157;}
+  .gender-panel.mas .gender-pct{color:#5dade2;}
+  .gender-sep{width:100%;height:1px;background:rgba(40,53,81,0.15);}
   .gender-row{text-align:center;width:100%;}
-  .gender-val{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.95rem;color:#fff;line-height:1.1;}
-  .gender-lbl{font-size:0.58rem;color:#8fa8bc;letter-spacing:1.5px;text-transform:uppercase;margin-top:1px;}
-  .prog-track{width:100%;height:5px;background:rgba(255,255,255,0.1);border-radius:3px;overflow:hidden;margin-top:3px;}
-  .prog-fill{height:100%;border-radius:3px;}
-  .gender-panel.fem .prog-fill{background:#c1db02;width:44.5%;}
-  .gender-panel.mas .prog-fill{background:#6e9bcc;width:55.5%;}
+  .gender-val{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.95rem;color:#283551;line-height:1.1;}
+  .gender-lbl{font-size:0.58rem;color:#5a6c7d;letter-spacing:1.5px;text-transform:uppercase;margin-top:1px;}
+  .prog-track{width:100%;height:5px;background:rgba(40,53,81,0.12);border-radius:3px;overflow:hidden;margin-top:3px;}
+  .prog-fill{height:100%;border-radius:3px;transition:width 0.3s ease;}
+  .gender-panel.fem .prog-fill{background:#d4e157;}
+  .gender-panel.mas .prog-fill{background:#5dade2;}
   .vs-col{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5px;padding:3px 0;width:80px;flex-shrink:0;}
-  .vs-txt{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1rem;color:rgba(255,255,255,0.25);letter-spacing:1px;}
-  .vs-line{width:1px;flex:1;background:rgba(255,255,255,0.07);}
-  .total-badge{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:7px 12px;text-align:center;}
-  .total-badge-val{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.1rem;color:#fff;}
-  .total-badge-lbl{font-size:0.56rem;color:#8fa8bc;letter-spacing:2px;text-transform:uppercase;}
+  .vs-txt{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1rem;color:rgba(40,53,81,0.4);letter-spacing:1px;}
+  .vs-line{width:1px;flex:1;background:rgba(40,53,81,0.15);}
+  .total-badge{background:rgba(40,53,81,0.08);border:1px solid rgba(40,53,81,0.2);border-radius:8px;padding:7px 12px;text-align:center;}
+  .total-badge-val{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.1rem;color:#283551;}
+  .total-badge-lbl{font-size:0.56rem;color:#5a6c7d;letter-spacing:2px;text-transform:uppercase;}
 
   /* ── TIPO PRODUCTO vs ── */
   .prod-wrap{display:flex;align-items:center;gap:10px;flex:1;}
   .prod-panel{flex:1;border-radius:10px;padding:14px 10px 12px;display:flex;flex-direction:column;align-items:center;gap:8px;}
-  .prod-panel.hip{background:rgba(254,65,0,0.12);border:1.5px solid rgba(254,65,0,0.4);}
-  .prod-panel.comp{background:rgba(193,219,2,0.1);border:1.5px solid rgba(193,219,2,0.35);}
+  .prod-panel.hip{background:rgba(254,65,0,0.18);border:1.5px solid rgba(254,65,0,0.6);}
+  .prod-panel.comp{background:rgba(193,219,2,0.15);border:1.5px solid rgba(193,219,2,0.5);}
   .prod-icon{width:56px;height:56px;}
   .prod-label{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.7rem;letter-spacing:2.5px;text-transform:uppercase;}
-  .prod-panel.hip .prod-label{color:#fe7040;}
-  .prod-panel.comp .prod-label{color:#c1db02;}
+  .prod-panel.hip .prod-label{color:#ff8a65;}
+  .prod-panel.comp .prod-label{color:#d4e157;}
   .prod-pct{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:2rem;line-height:1;}
-  .prod-panel.hip .prod-pct{color:#fe7040;}
-  .prod-panel.comp .prod-pct{color:#c1db02;}
-  .prod-sep{width:100%;height:1px;background:rgba(255,255,255,0.1);}
+  .prod-panel.hip .prod-pct{color:#ff8a65;}
+  .prod-panel.comp .prod-pct{color:#d4e157;}
+  .prod-sep{width:100%;height:1px;background:rgba(40,53,81,0.15);}
   .prod-row{text-align:center;width:100%;}
-  .prod-val{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.85rem;color:#fff;line-height:1.1;}
-  .prod-lbl{font-size:0.57rem;color:#8fa8bc;letter-spacing:1.5px;text-transform:uppercase;margin-top:1px;}
-  .vs-badge{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:0.85rem;color:rgba(255,255,255,0.4);flex-shrink:0;}
+  .prod-val{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.85rem;color:#283551;line-height:1.1;}
+  .prod-lbl{font-size:0.57rem;color:#5a6c7d;letter-spacing:1.5px;text-transform:uppercase;margin-top:1px;}
+  .vs-badge{background:rgba(40,53,81,0.08);border:1px solid rgba(40,53,81,0.2);border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:0.85rem;color:rgba(40,53,81,0.5);flex-shrink:0;}
 
   /* ── DESTINO CRÉDITO ── */
   .destino-wrap{display:flex;flex-direction:column;gap:8px;flex:1;justify-content:center;}
-  .destino-row{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,0.05);border-radius:8px;padding:8px 12px;}
+  .destino-row{display:flex;align-items:center;gap:10px;background:rgba(40,53,81,0.05);border-radius:8px;padding:8px 12px;}
   .destino-icon{width:38px;height:38px;flex-shrink:0;}
   .destino-info{flex:1;}
-  .destino-name{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.85rem;color:#fff;text-transform:uppercase;letter-spacing:1px;}
-  .destino-sub{font-size:0.6rem;color:#8fa8bc;margin-top:1px;}
+  .destino-name{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.85rem;color:#283551;text-transform:uppercase;letter-spacing:1px;}
+  .destino-sub{font-size:0.6rem;color:#5a6c7d;margin-top:1px;}
   .destino-bar-wrap{flex:1;min-width:60px;}
-  .destino-bar-track{width:100%;height:6px;background:rgba(255,255,255,0.1);border-radius:3px;margin-top:4px;overflow:hidden;}
+  .destino-bar-track{width:100%;height:6px;background:rgba(40,53,81,0.12);border-radius:3px;margin-top:4px;overflow:hidden;}
   .destino-bar-fill{height:100%;border-radius:3px;}
   .destino-pct{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.1rem;line-height:1;text-align:right;flex-shrink:0;}
 
+  /* ── SEGMENTO ── */
+  .segmento-wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+  .segmento-card{border-radius:10px;padding:16px 12px;display:flex;flex-direction:column;align-items:center;gap:8px;transition:all 0.3s;}
+  .segmento-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.2);}
+  .segmento-card.oro{background:rgba(255,193,7,0.18);border:1.5px solid rgba(255,193,7,0.6);}
+  .segmento-card.plata{background:rgba(189,189,189,0.18);border:1.5px solid rgba(189,189,189,0.6);}
+  .segmento-card.sin{background:rgba(158,158,158,0.12);border:1.5px solid rgba(158,158,158,0.4);}
+  .segmento-card.adjudicacion{background:rgba(156,39,176,0.18);border:1.5px solid rgba(156,39,176,0.6);}
+  .segmento-card.reestructura{background:rgba(0,150,136,0.18);border:1.5px solid rgba(0,150,136,0.6);}
+  .segmento-card.traslado{background:rgba(33,150,243,0.18);border:1.5px solid rgba(33,150,243,0.6);}
+  .segmento-icon{display:block;font-size:2.8rem;margin-bottom:8px;}
+  .segmento-label{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.76rem;letter-spacing:2px;text-transform:uppercase;}
+  .segmento-card.oro .segmento-label{color:#ffd54f;}
+  .segmento-card.plata .segmento-label{color:#e0e0e0;}
+  .segmento-card.sin .segmento-label{color:#bdbdbd;}
+  .segmento-card.adjudicacion .segmento-label{color:#ba68c8;}
+  .segmento-card.reestructura .segmento-label{color:#26a69a;}
+  .segmento-card.traslado .segmento-label{color:#5dade2;}
+  .segmento-sep{width:100%;height:1px;background:rgba(255,255,255,0.15);margin:2px 0;}
+  .segmento-val{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.88rem;color:#283551;line-height:1.15;text-align:center;}
+  .segmento-lbl{font-size:0.58rem;color:#b0bec5;letter-spacing:1.5px;text-transform:uppercase;margin-top:1px;}
+
+  /* ── TASA DE INTERES ── */
+  .tasa-wrap{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+  .tasa-card{border-radius:10px;padding:16px 12px;display:flex;flex-direction:column;align-items:center;gap:8px;transition:all 0.3s;}
+  .tasa-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.2);}
+  .tasa-card.tasa1{background:rgba(82,113,255,0.18);border:1.5px solid rgba(82,113,255,0.6);}
+  .tasa-card.tasa2{background:rgba(243,149,25,0.18);border:1.5px solid rgba(243,149,25,0.6);}
+  .tasa-card.tasa3{background:rgba(39,174,96,0.18);border:1.5px solid rgba(39,174,96,0.6);}
+  .tasa-card.tasa4{background:rgba(231,76,60,0.18);border:1.5px solid rgba(231,76,60,0.6);}
+  .tasa-icon{display:block;font-size:2.8rem;margin-bottom:8px;}
+  .tasa-label{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.95rem;letter-spacing:2px;text-transform:uppercase;}
+  .tasa-card.tasa1 .tasa-label{color:#5271ff;}
+  .tasa-card.tasa2 .tasa-label{color:#f39519;}
+  .tasa-card.tasa3 .tasa-label{color:#27ae60;}
+  .tasa-card.tasa4 .tasa-label{color:#e74c3c;}
+  .tasa-sep{width:100%;height:1px;background:rgba(255,255,255,0.15);margin:2px 0;}
+  .tasa-val{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.88rem;color:#283551;line-height:1.15;text-align:center;}
+
+  /* ── AVALUO ── */
+  .avaluo-wrap{display:flex;flex-direction:column;gap:24px;}
+  .avaluo-item{display:flex;align-items:center;gap:16px;position:relative;}
+  .avaluo-label{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.85rem;letter-spacing:1.5px;text-transform:uppercase;color:#b0bec5;min-width:140px;}
+  .avaluo-bar-container{flex:1;height:18px;background:rgba(255,255,255,0.08);border-radius:10px;overflow:hidden;position:relative;}
+  .avaluo-bar{height:100%;border-radius:10px;transition:width 0.6s ease;}
+  .avaluo-bar.menor{background:linear-gradient(90deg,#5271ff,#4a90d9);}
+  .avaluo-bar.mayor{background:linear-gradient(90deg,#ff9800,#f39519);}
+  .avaluo-bar.pendiente{background:linear-gradient(90deg,#8e44ad,#9b59b6);}
+  .avaluo-percent{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:2rem;color:#283551;min-width:70px;text-align:right;}
+  .avaluo-details{font-size:0.7rem;color:#78909c;margin-top:2px;display:flex;gap:12px;margin-left:156px;}
+
   /* ── FOOTER ── */
   footer{background:var(--card);text-align:center;padding:12px;font-size:0.68rem;color:#8fa8bc;letter-spacing:2px;text-transform:uppercase;border-top:2px solid var(--olive);}
+  /* ── FILTER BUTTONS ── */
+  .filter-btn,.filter-btn-pct,.filter-btn-genero,.filter-btn-segmento,.filter-btn-tasa,.filter-btn-avaluo,.filter-btn-avaluopend,.filter-btn-depto,.filter-btn-rango{background:rgba(40,53,81,0.05);border:2px solid rgba(40,53,81,0.25);color:#283551;padding:8px 22px;border-radius:8px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.85rem;cursor:pointer;transition:all 0.2s;letter-spacing:1px;text-transform:uppercase;}
+  .filter-btn:hover,.filter-btn-pct:hover,.filter-btn-genero:hover,.filter-btn-segmento:hover,.filter-btn-tasa:hover,.filter-btn-avaluo:hover,.filter-btn-avaluopend:hover,.filter-btn-depto:hover,.filter-btn-rango:hover{background:#f39519;color:#fff;border-color:#f39519;}
+  .filter-btn.active,.filter-btn-pct.active,.filter-btn-genero.active,.filter-btn-segmento.active,.filter-btn-tasa.active,.filter-btn-avaluo.active,.filter-btn-avaluopend.active,.filter-btn-depto.active,.filter-btn-rango.active{background:#f39519;color:#fff;border-color:#f39519;}
 
-  @media(max-width:900px){
-    .g-col-6,.g-col-4,.g-col-8{grid-column:span 12}
-    main{padding:16px 12px}
-    .header-inner{flex-direction:column;gap:10px;text-align:center}
-    .header-title{text-align:center}
-    .kpi-strip{flex-wrap:wrap}
+  /* ── GLOBAL FILTER ── */
+  .global-filter-wrap{background:#283551;padding:16px 38px;border-bottom:3px solid var(--lime);}
+  .global-filter-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.9rem;color:#c1db02;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;}
+  .global-filter-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+  .global-filter-btn{background:rgba(255,255,255,0.1);border:2px solid rgba(193,219,2,0.3);color:#fff;padding:10px 28px;border-radius:8px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.9rem;cursor:pointer;transition:all 0.2s;letter-spacing:1.5px;text-transform:uppercase;position:relative;}
+  .global-filter-btn:hover{background:rgba(193,219,2,0.2);border-color:#c1db02;transform:translateY(-2px);}
+  .global-filter-btn.selected{background:#c1db02;color:#283551;border-color:#c1db02;box-shadow:0 4px 12px rgba(193,219,2,0.4);}
+
+  /* ── RESPONSIVE DESIGN ── */
+  /* Tablets (max-width: 1024px) */
+  @media (max-width: 1024px) {
+    main{padding:28px 20px;gap:16px;}
+    .card{padding:18px 16px;}
+    .card-title{font-size:1.25rem;}
+    .card-desc{font-size:0.65rem;}
+    .chart-wrap{min-height:220px;}
+    .kpi-item{padding:16px 14px;}
+    .kpi-value{font-size:2rem;}
+    .kpi-label{font-size:0.75rem;}
+    .filter-btn,.filter-btn-pct,.filter-btn-genero,.filter-btn-segmento,.filter-btn-tasa,.filter-btn-avaluo,.filter-btn-avaluopend,.filter-btn-depto,.filter-btn-rango{padding:7px 18px;font-size:0.75rem;}
+    .gender-panel img{width:150px!important;height:180px!important;}
+    .segmento-icon{font-size:2.8rem;}
+    .tasa-icon{font-size:2.5rem;}
+  }
+
+  /* Tablets pequeñas y móviles grandes (max-width: 768px) */
+  @media (max-width: 768px) {
+    header{padding:12px 16px;flex-direction:column;gap:12px;align-items:stretch;}
+    .header-inner{flex-direction:column;gap:10px;text-align:center;align-items:center;}
+    header h1{font-size:1.3rem;letter-spacing:1.5px;text-align:center;}
+    .period{font-size:0.75rem;}
+    .page-nav-btn{padding:6px 12px;font-size:0.65rem;margin-left:0;flex:1 1 auto;min-width:80px;}
+    
+    main{padding:12px;gap:12px;}
+    .g-col-6,.g-col-4,.g-col-8{grid-column:span 12;}
+    
+    .kpi-strip{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+    .kpi-item{padding:14px 12px;}
+    .kpi-value{font-size:1.6rem;}
+    .kpi-label{font-size:0.65rem;}
+    .kpi-sub{font-size:0.7rem;}
+    
+    .card{padding:14px 12px;}
+    .card-title{font-size:1.1rem;letter-spacing:1.2px;}
+    .card-desc{font-size:0.58rem;margin-bottom:10px;}
+    .chart-wrap{min-height:200px;}
+    
+    .filter-btn,.filter-btn-pct,.filter-btn-genero,.filter-btn-segmento,.filter-btn-tasa,.filter-btn-avaluo,.filter-btn-avaluopend,.filter-btn-depto,.filter-btn-rango{padding:6px 12px;font-size:0.65rem;}
+    
+    .gender-wrap{flex-direction:column;gap:16px;}
+    .gender-panel{padding:16px;}
+    .gender-panel img{width:140px!important;height:170px!important;}
+    .gender-tag{font-size:0.85rem;}
+    .gender-pct{font-size:2.2rem;}
+    .gender-val{font-size:1rem;}
+    .gender-lbl{font-size:0.65rem;}
+    .vs-col{display:none;}
+    
+    .segmento-grid{gap:8px;}
+    .segmento-icon{font-size:2.5rem;}
+    .segmento-name{font-size:0.75rem;}
+    .segmento-total{font-size:1.8rem;}
+    .segmento-label{font-size:0.6rem;}
+    
+    .tasa-grid{gap:8px;}
+    .tasa-icon{font-size:2.2rem;}
+    .tasa-label{font-size:0.75rem;}
+    .tasa-rate{font-size:1.8rem;}
+    
+    .avaluo-label{font-size:0.75rem;min-width:120px;}
+    .avaluo-percent{font-size:1.6rem;}
+    .avaluo-details{font-size:0.65rem;}
+  }
+
+  /* Móviles (max-width: 480px) */
+  @media (max-width: 480px) {
+    header{padding:10px 12px;}
+    header h1{font-size:1.1rem;letter-spacing:1px;}
+    .period{font-size:0.7rem;}
+    .page-nav-btn{padding:5px 10px;font-size:0.6rem;min-width:70px;}
+    
+    main{padding:10px;gap:10px;}
+    
+    .kpi-strip{grid-template-columns:1fr;gap:8px;}
+    .kpi-item{padding:12px 10px;}
+    .kpi-value{font-size:1.5rem;}
+    .kpi-label{font-size:0.6rem;letter-spacing:1px;}
+    .kpi-sub{font-size:0.65rem;}
+    
+    .card{padding:12px 10px;border-radius:10px;}
+    .card-title{font-size:1rem;letter-spacing:1px;}
+    .card-desc{font-size:0.55rem;margin-bottom:8px;}
+    .chart-wrap{min-height:180px;}
+    
+    .filter-btn,.filter-btn-pct,.filter-btn-genero,.filter-btn-segmento,.filter-btn-tasa,.filter-btn-avaluo,.filter-btn-avaluopend,.filter-btn-depto,.filter-btn-rango{padding:5px 10px;font-size:0.6rem;letter-spacing:0.5px;}
+    
+    .gender-panel img{width:120px!important;height:150px!important;}
+    .gender-tag{font-size:0.8rem;}
+    .gender-pct{font-size:2rem;padding:5px 12px;}
+    .gender-val{font-size:0.95rem;}
+    .gender-lbl{font-size:0.6rem;}
+    
+    .segmento-card{padding:10px 8px;}
+    .segmento-icon{font-size:2.2rem;}
+    .segmento-name{font-size:0.7rem;}
+    .segmento-total{font-size:1.6rem;}
+    .segmento-label{font-size:0.55rem;}
+    
+    .tasa-card{padding:10px 8px;}
+    .tasa-icon{font-size:2rem;}
+    .tasa-label{font-size:0.7rem;}
+    .tasa-rate{font-size:1.6rem;}
+    
+    .avaluo-wrap{gap:18px;}
+    .avaluo-label{font-size:0.7rem;min-width:100px;}
+    .avaluo-bar-container{height:16px;}
+    .avaluo-percent{font-size:1.4rem;min-width:60px;}
+    .avaluo-details{font-size:0.6rem;margin-left:100px;}
+    
+    table{font-size:0.65rem;}
+    table th{font-size:0.6rem;padding:4px 3px;}
+    table td{font-size:0.65rem;padding:4px 3px;}
+  }
+
+  /* Móviles pequeños (max-width: 360px) */
+  @media (max-width: 360px) {
+    header h1{font-size:0.95rem;}
+    .page-nav-btn{padding:4px 8px;font-size:0.55rem;min-width:60px;}
+    .kpi-value{font-size:1.3rem;}
+    .card-title{font-size:0.95rem;}
+    .chart-wrap{min-height:170px;}
+    .gender-panel img{width:100px!important;height:130px!important;}
+    .gender-pct{font-size:1.8rem;}
+    .segmento-icon{font-size:2rem;}
+    .tasa-icon{font-size:1.8rem;}
+  }
+
+  /* Pantallas grandes (min-width: 1600px) */
+  @media (min-width: 1600px) {
+    main{max-width:1800px;margin:0 auto;padding:32px 28px;gap:24px;}
+    .kpi-strip{gap:24px;}
+    .kpi-value{font-size:2.8rem;}
+    .kpi-label{font-size:0.85rem;}
+    .card{padding:22px 18px;}
+    .card-title{font-size:1.5rem;}
+    .card-desc{font-size:0.75rem;}
+    .chart-wrap{min-height:280px;}
+    .gender-panel img{width:200px!important;height:240px!important;}
   }
 </style>
 </head>
@@ -148,15 +354,31 @@
 <header>
   <div class="header-inner">
     <div style="display:inline-block;">
-      <img src="https://live.staticflickr.com/65535/55105453377_b2908c23a2_b.jpg" alt="COOPEXPRESS" style="height:72px;width:auto;display:block;object-fit:contain;">
+      <img src="https://i.ibb.co/gMbncZQF/Designer-2.png" alt="COOPEXPRESS" style="height:72px;width:auto;display:block;object-fit:contain;">
     </div>
     <div class="header-title">
       <h1>Dashboard de Cartera en Mora</h1>
-      <div class="period">Diciembre 2025 → Enero 2026 </div>
+      <div class="period">Diciembre 2025 → Febrero 2026 </div>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;">
+      <button class="page-nav-btn active" onclick="switchPage(1)">PÁGINA 1</button>
+      <button class="page-nav-btn" onclick="switchPage(2)">PÁGINA 2</button>
     </div>
   </div>
   <div class="header-stripe"></div>
 </header>
+
+<!-- GLOBAL FILTER -->
+<div class="global-filter-wrap">
+  <div class="global-filter-btns">
+    <button class="global-filter-btn" data-month="diciembre">DIC 2025</button>
+    <button class="global-filter-btn selected" data-month="enero">ENE 2026</button>
+    <button class="global-filter-btn" data-month="febrero">FEB 2026</button>
+  </div>
+</div>
+
+<!-- PAGE 1 - Main Dashboard -->
+<div class="page-view active" id="page1">
 
 <div class="kpi-strip">
   <div class="kpi-item"><div class="kpi-top-bar"></div><div class="kpi-label">Capital Total Enero 2026</div><div class="kpi-value">Q 27,757,024</div><div class="kpi-sub">+5.7% vs mes anterior</div></div>
@@ -168,242 +390,405 @@
 
 <main>
 
-<!-- ① Capital y Casos -->
-<div class="card g-col-6">
-  <div class="card-header">
-    <div class="card-title">Capital y Cantidad de Casos</div>
-    <div class="card-desc">Crecimiento del capital en mora (Q) y variación en casos activos — Diciembre 2025 vs Enero 2026</div>
-  </div>
-  <div class="card-body"><div class="chart-wrap"><canvas id="c1"></canvas></div></div>
-</div>
-
 <!-- ② Casos por Rango -->
-<div class="card g-col-6">
-  <div class="card-header">
-    <div class="card-title">Casos por Mes y Rango de Días</div>
-    <div class="card-desc">Distribución de casos por antigüedad de mora (0–30, 31–60, 61–90, +90 días) — comparativo mensual</div>
-  </div>
-  <div class="card-body"><div class="chart-wrap"><canvas id="c2"></canvas></div></div>
-</div>
-
-<!-- ③ Género -->
 <div class="card g-col-4">
   <div class="card-header">
-    <div class="card-title">Detalle por Género</div>
-    <div class="card-desc">Participación de hombres y mujeres en capital e número de casos — total 307 casos en mora</div>
+    <div class="card-title">Rango de Días</div>
+    <div class="card-desc">Cantidad de créditos por estado</div>
   </div>
   <div class="card-body">
-    <div class="gender-wrap">
-
-      <!-- FEMENINO -->
-      <div class="gender-panel fem">
-        <img src="https://i.ibb.co/4nLnc7ZW/Designer.png" alt="Femenino" style="width:180px;height:220px;object-fit:contain;object-position:center;display:block;">
-        <div class="gender-tag">Femenino</div>
-        <div class="gender-pct">44.5%</div>
-        <div class="gender-sep"></div>
-        <div class="gender-row"><div class="gender-val">140 casos</div><div class="gender-lbl">cantidad</div></div>
-        <div class="gender-row"><div class="gender-val">Q 12,357,122</div><div class="gender-lbl">capital en mora</div></div>
-        <div class="prog-track"><div class="prog-fill"></div></div>
-      </div>
-
-      <div class="vs-col">
-        <div class="vs-txt">VS</div>
-        <div class="vs-line"></div>
-        <div class="total-badge"><div class="total-badge-val">307</div><div class="total-badge-lbl">Total</div></div>
-        <div class="vs-line"></div>
-      </div>
-
-      <!-- MASCULINO -->
-      <div class="gender-panel mas">
-        <img src="https://i.ibb.co/4Z3j1mnB/Designer-1.png" alt="Masculino" style="width:180px;height:220px;object-fit:contain;object-position:center;display:block;">
-        <div class="gender-tag">Masculino</div>
-        <div class="gender-pct">55.5%</div>
-        <div class="gender-sep"></div>
-        <div class="gender-row"><div class="gender-val">167 casos</div><div class="gender-lbl">cantidad</div></div>
-        <div class="gender-row"><div class="gender-val">Q 15,399,902</div><div class="gender-lbl">capital en mora</div></div>
-        <div class="prog-track"><div class="prog-fill"></div></div>
-      </div>
-
+    <div style="display:flex;gap:8px;margin-bottom:12px;justify-content:center;flex-wrap:wrap;">
+      <button class="filter-btn" data-filter="diciembre">DIC 2025</button>
+      <button class="filter-btn" data-filter="enero">ENE 2026</button>
+      <button class="filter-btn" data-filter="febrero">FEB 2026</button>
+      <button class="filter-btn active" data-filter="todos">TODOS</button>
     </div>
+    <div class="chart-wrap"><canvas id="c2"></canvas></div>
   </div>
 </div>
 
-<!-- ④ Estado -->
-<div class="card g-col-8">
-  <div class="card-header">
-    <div class="card-title">Detalle por Estado</div>
-    <div class="card-desc">Capital (Q) y número de casos según etapa de gestión: cobro administrativo, judicial y vigentes en mora</div>
-  </div>
-  <div class="card-body"><div class="chart-wrap"><canvas id="c8"></canvas></div></div>
-</div>
-
-<!-- ⑤ Tipo Producto -->
+<!-- ②B Porcentaje Rango de Días -->
 <div class="card g-col-4">
   <div class="card-header">
-    <div class="card-title">Tipo de Producto</div>
-    <div class="card-desc">Peso relativo de créditos hipotecarios vs. compraventa en el capital total (Q) de la cartera en mora</div>
+    <div class="card-title">% Rango Días</div>
+    <div class="card-desc">Distribución porcentual por estado</div>
   </div>
   <div class="card-body">
-    <div class="prod-wrap">
-      <!-- Hipotecarios -->
-      <div class="prod-panel hip">
-        <svg class="prod-icon" viewBox="0 0 56 56" fill="none">
-          <!-- casa con techo -->
-          <polygon points="28,4 50,22 50,52 6,52 6,22" fill="rgba(254,65,0,0.15)" stroke="#fe4100" stroke-width="1.5"/>
-          <!-- techo relleno -->
-          <polygon points="28,4 52,24 4,24" fill="rgba(254,65,0,0.35)"/>
-          <!-- chimenea -->
-          <rect x="36" y="8" width="5" height="10" rx="1" fill="#fe7040"/>
-          <rect x="35" y="7" width="7" height="3" rx="1" fill="#fe4100"/>
-          <!-- puerta -->
-          <rect x="22" y="36" width="12" height="16" rx="2" fill="rgba(254,65,0,0.5)"/>
-          <circle cx="31" cy="44.5" r="1.2" fill="#fe4100"/>
-          <!-- ventana izq -->
-          <rect x="9" y="30" width="9" height="8" rx="1.5" fill="rgba(254,65,0,0.3)" stroke="#fe7040" stroke-width="0.8"/>
-          <line x1="13.5" y1="30" x2="13.5" y2="38" stroke="#fe7040" stroke-width="0.7"/>
-          <line x1="9" y1="34" x2="18" y2="34" stroke="#fe7040" stroke-width="0.7"/>
-          <!-- ventana der -->
-          <rect x="38" y="30" width="9" height="8" rx="1.5" fill="rgba(254,65,0,0.3)" stroke="#fe7040" stroke-width="0.8"/>
-          <line x1="42.5" y1="30" x2="42.5" y2="38" stroke="#fe7040" stroke-width="0.7"/>
-          <line x1="38" y1="34" x2="47" y2="34" stroke="#fe7040" stroke-width="0.7"/>
-          <!-- piso -->
-          <line x1="4" y1="52" x2="52" y2="52" stroke="#fe4100" stroke-width="1.5"/>
-        </svg>
-        <div class="prod-label">Hipotecarios</div>
-        <div class="prod-pct">54.8%</div>
-        <div class="prod-sep"></div>
-        <div class="prod-row"><div class="prod-val">137 casos</div><div class="prod-lbl">cantidad</div></div>
-        <div class="prod-row"><div class="prod-val">Q 15,212,377</div><div class="prod-lbl">capital en mora</div></div>
-      </div>
-      <div class="vs-badge">VS</div>
-      <!-- Compraventa -->
-      <div class="prod-panel comp">
-        <svg class="prod-icon" viewBox="0 0 56 56" fill="none">
-          <!-- apretón de manos / contrato -->
-          <!-- papel contrato -->
-          <rect x="10" y="6" width="26" height="34" rx="2" fill="rgba(193,219,2,0.15)" stroke="#c1db02" stroke-width="1.4"/>
-          <!-- líneas texto -->
-          <line x1="15" y1="14" x2="31" y2="14" stroke="#c1db02" stroke-width="1.2" opacity="0.7"/>
-          <line x1="15" y1="19" x2="31" y2="19" stroke="#c1db02" stroke-width="1.2" opacity="0.7"/>
-          <line x1="15" y1="24" x2="28" y2="24" stroke="#c1db02" stroke-width="1.2" opacity="0.7"/>
-          <line x1="15" y1="29" x2="26" y2="29" stroke="#c1db02" stroke-width="0.9" opacity="0.5"/>
-          <!-- sello / firma -->
-          <path d="M14 34 Q17 32 18 35 Q19 32 22 34" stroke="#99b01e" stroke-width="1.3" fill="none" stroke-linecap="round"/>
-          <!-- mano derecha con bolígrafo -->
-          <path d="M30 28 Q36 24 42 26 Q45 28 44 32 Q42 36 38 36 L32 38Z" fill="#d4926a" opacity="0.9"/>
-          <rect x="40" y="18" width="3" height="14" rx="1.5" transform="rotate(30 40 18)" fill="#283551"/>
-          <path d="M39 30 L41 32" stroke="#c1db02" stroke-width="0.8" stroke-linecap="round"/>
-          <!-- llave -->
-          <circle cx="42" cy="42" r="5" stroke="#c1db02" stroke-width="1.5" fill="rgba(193,219,2,0.15)"/>
-          <rect x="46" y="41" width="8" height="2" rx="1" fill="#c1db02"/>
-          <rect x="52" y="43" width="2" height="3" rx="0.5" fill="#c1db02"/>
-          <rect x="49" y="43" width="2" height="2" rx="0.5" fill="#c1db02"/>
-          <circle cx="42" cy="42" r="2" fill="#c1db02"/>
-        </svg>
-        <div class="prod-label">Compraventa</div>
-        <div class="prod-pct">45.2%</div>
-        <div class="prod-sep"></div>
-        <div class="prod-row"><div class="prod-val">170 casos</div><div class="prod-lbl">cantidad</div></div>
-        <div class="prod-row"><div class="prod-val">Q 12,544,647</div><div class="prod-lbl">capital en mora</div></div>
-      </div>
+    <div style="display:flex;gap:8px;margin-bottom:12px;justify-content:center;flex-wrap:wrap;">
+      <button class="filter-btn-pct" data-filter="diciembre">DIC 2025</button>
+      <button class="filter-btn-pct" data-filter="enero">ENE 2026</button>
+      <button class="filter-btn-pct" data-filter="febrero">FEB 2026</button>
+      <button class="filter-btn-pct active" data-filter="todos">TODOS</button>
     </div>
+    <div class="chart-wrap"><canvas id="c2b"></canvas></div>
   </div>
 </div>
 
-<!-- ⑥ Destino Crédito -->
+<!-- Avalúos Pendientes -->
 <div class="card g-col-4">
   <div class="card-header">
-    <div class="card-title">Destino Crédito</div>
-    <div class="card-desc">Propósito declarado del crédito: consumo personal, productivo o vivienda y su participación en capital (Q)</div>
+    <div class="card-title">Avalúos Pendientes</div>
+    <div class="card-desc">Casos y capital por año de expediente sin avalúo</div>
   </div>
   <div class="card-body">
-    <div class="destino-wrap">
-      <!-- Consumo -->
-      <div class="destino-row" style="border-left:3px solid #fe4100;">
-        <svg class="destino-icon" viewBox="0 0 38 38" fill="none">
-          <circle cx="19" cy="19" r="18" fill="rgba(254,65,0,0.12)"/>
-          <!-- carrito de compras -->
-          <path d="M8 11 L11 11 L14 24 L28 24 L31 15 L12 15" stroke="#fe4100" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-          <circle cx="16" cy="27.5" r="2" fill="#fe4100"/>
-          <circle cx="26" cy="27.5" r="2" fill="#fe4100"/>
-          <!-- billetes -->
-          <rect x="19" y="7" width="10" height="6" rx="1" fill="rgba(254,65,0,0.4)" stroke="#fe4100" stroke-width="0.8"/>
-          <line x1="21" y1="10" x2="27" y2="10" stroke="#fe4100" stroke-width="0.7"/>
-        </svg>
-        <div class="destino-info">
-          <div class="destino-name">Consumo</div>
-          <div class="destino-sub">196 casos · Q 15,894,570</div>
-          <div class="destino-bar-wrap">
-            <div class="destino-bar-track"><div class="destino-bar-fill" style="background:#fe4100;width:57.3%;"></div></div>
-          </div>
-        </div>
-        <div class="destino-pct" style="color:#fe7040;">57.3%</div>
-      </div>
-      <!-- Productivos -->
-      <div class="destino-row" style="border-left:3px solid #99b01e;">
-        <svg class="destino-icon" viewBox="0 0 38 38" fill="none">
-          <circle cx="19" cy="19" r="18" fill="rgba(153,176,30,0.12)"/>
-          <!-- engranaje / fábrica -->
-          <circle cx="19" cy="19" r="7" stroke="#99b01e" stroke-width="1.8" fill="rgba(153,176,30,0.2)"/>
-          <circle cx="19" cy="19" r="2.5" fill="#99b01e"/>
-          <path d="M19 9 L19 12 M19 26 L19 29 M9 19 L12 19 M26 19 L29 19 M12 12 L14 14 M24 24 L26 26 M26 12 L24 14 M14 24 L12 26" stroke="#99b01e" stroke-width="2" stroke-linecap="round"/>
-          <!-- flecha crecimiento -->
-          <path d="M10 28 L16 22 L20 25 L28 14" stroke="#c1db02" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-          <polygon points="28,14 24,14 28,18" fill="#c1db02"/>
-        </svg>
-        <div class="destino-info">
-          <div class="destino-name">Productivos</div>
-          <div class="destino-sub">110 casos · Q 11,738,364</div>
-          <div class="destino-bar-wrap">
-            <div class="destino-bar-track"><div class="destino-bar-fill" style="background:#99b01e;width:42.3%;"></div></div>
-          </div>
-        </div>
-        <div class="destino-pct" style="color:#b0cc30;">42.3%</div>
-      </div>
-      <!-- Vivienda -->
-      <div class="destino-row" style="border-left:3px solid #2eccc5;">
-        <svg class="destino-icon" viewBox="0 0 38 38" fill="none">
-          <circle cx="19" cy="19" r="18" fill="rgba(46,204,197,0.1)"/>
-          <!-- casa pequeña -->
-          <polygon points="19,7 32,17 32,32 6,32 6,17" fill="rgba(46,204,197,0.15)" stroke="#2eccc5" stroke-width="1.5"/>
-          <polygon points="19,7 34,18 4,18" fill="rgba(46,204,197,0.4)"/>
-          <rect x="15" y="22" width="8" height="10" rx="1" fill="rgba(46,204,197,0.4)"/>
-          <circle cx="21" cy="27" r="0.8" fill="#2eccc5"/>
-          <!-- corazón -->
-          <path d="M16 13 Q16 10 19 12 Q22 10 22 13 Q22 16 19 18 Q16 16 16 13Z" fill="#2eccc5" opacity="0.8"/>
-        </svg>
-        <div class="destino-info">
-          <div class="destino-name">Vivienda</div>
-          <div class="destino-sub">1 caso · Q 124,091</div>
-          <div class="destino-bar-wrap">
-            <div class="destino-bar-track"><div class="destino-bar-fill" style="background:#2eccc5;width:0.4%;min-width:4px;"></div></div>
-          </div>
-        </div>
-        <div class="destino-pct" style="color:#2eccc5;">0.4%</div>
-      </div>
+    <div style="display:flex;gap:8px;margin-bottom:12px;justify-content:center;flex-wrap:wrap;">
+      <button class="filter-btn-avaluopend" data-filter="diciembre">DIC 2025</button>
+      <button class="filter-btn-avaluopend active" data-filter="enero">ENE 2026</button>
     </div>
+    <div class="chart-wrap"><canvas id="avaluoPendChart"></canvas></div>
   </div>
-</div>
-
-<!-- ⑦ Cosecha -->
-<div class="card g-col-4">
-  <div class="card-header">
-    <div class="card-title">Año de Cosecha</div>
-    <div class="card-desc">Casos en mora por rango de antigüedad y año de originación del crédito (2024, 2025, 2026)</div>
-  </div>
-  <div class="card-body"><div class="chart-wrap" style="min-height:230px;"><canvas id="c7"></canvas></div></div>
 </div>
 
 <!-- ⑧ Segmento -->
-<div class="card g-col-12">
+<div class="card g-col-4">
   <div class="card-header">
     <div class="card-title">Detalle por Segmento</div>
-    <div class="card-desc">Capital (Q) y porcentaje por segmento de cartera: adjudicación, anterior, oro, plata, reestructura, traslado y sin segmento asignado</div>
+    <div class="card-desc">Casos y capital (Q) por clasificación: oro, plata, adjudicación, reestructura, traslado y sin segmento</div>
   </div>
-  <div class="card-body"><div class="chart-wrap" style="min-height:230px;"><canvas id="c4"></canvas></div></div>
+  <div class="card-body">
+    <div style="display:flex;gap:8px;margin-bottom:12px;justify-content:center;flex-wrap:wrap;">
+      <button class="filter-btn-segmento" data-filter="diciembre">DIC 2025</button>
+      <button class="filter-btn-segmento" data-filter="enero">ENE 2026</button>
+      <button class="filter-btn-segmento active" data-filter="febrero">FEB 2026</button>
+      <button class="filter-btn-segmento" data-filter="todos">TODOS</button>
+    </div>
+    <div class="segmento-wrap">
+      <!-- ORO -->
+      <div class="segmento-card oro">
+        <span class="segmento-icon" style="font-size:2.8rem;margin-bottom:8px;">🥇</span>
+        <div class="segmento-label">Oro</div>
+        <div class="segmento-sep"></div>
+        <div class="segmento-val" id="oroCasos">14 casos</div>
+        <div class="segmento-val" id="oroCapital" style="font-size:0.82rem;margin-top:2px;">Q 1,358,523</div>
+      </div>
+
+      <!-- PLATA -->
+      <div class="segmento-card plata">
+        <span class="segmento-icon" style="font-size:2.8rem;margin-bottom:8px;">🥈</span>
+        <div class="segmento-label">Plata</div>
+        <div class="segmento-sep"></div>
+        <div class="segmento-val" id="plataCasos">7 casos</div>
+        <div class="segmento-val" id="plataCapital" style="font-size:0.82rem;margin-top:2px;">Q 957,770</div>
+      </div>
+
+      <!-- SIN SEGMENTO -->
+      <div class="segmento-card sin">
+        <span class="segmento-icon" style="font-size:2.8rem;margin-bottom:8px;">📊</span>
+        <div class="segmento-label">Sin Segmento</div>
+        <div class="segmento-sep"></div>
+        <div class="segmento-val" id="sinCasos">139 casos</div>
+        <div class="segmento-val" id="sinCapital" style="font-size:0.82rem;margin-top:2px;">Q 12,153,158</div>
+      </div>
+
+      <!-- ADJUDICACION -->
+      <div class="segmento-card adjudicacion">
+        <img src="https://i.ibb.co/Y7C2BtMM/15719087.png" alt="Adjudicación" style="width:52px;height:52px;object-fit:contain;margin-bottom:8px;">
+        <div class="segmento-label">Adjudicación</div>
+        <div class="segmento-sep"></div>
+        <div class="segmento-val" id="adjudicacionCasos">0 casos</div>
+        <div class="segmento-val" id="adjudicacionCapital" style="font-size:0.82rem;margin-top:2px;">Q 0</div>
+      </div>
+
+      <!-- REESTRUCTURA -->
+      <div class="segmento-card reestructura">
+        <img src="https://i.ibb.co/RTT5RYc8/10729289.png" alt="Reestructura" style="width:52px;height:52px;object-fit:contain;margin-bottom:8px;">
+        <div class="segmento-label">Reestructura</div>
+        <div class="segmento-sep"></div>
+        <div class="segmento-val" id="reestructuraCasos">0 casos</div>
+        <div class="segmento-val" id="reestructuraCapital" style="font-size:0.82rem;margin-top:2px;">Q 0</div>
+      </div>
+
+      <!-- TRASLADO -->
+      <div class="segmento-card traslado">
+        <img src="https://i.ibb.co/yBdDRbWW/1123561.png" alt="Traslado" style="width:52px;height:52px;object-fit:contain;margin-bottom:8px;">
+        <div class="segmento-label">Traslado</div>
+        <div class="segmento-sep"></div>
+        <div class="segmento-val" id="trasladoCasos">0 casos</div>
+        <div class="segmento-val" id="trasladoCapital" style="font-size:0.82rem;margin-top:2px;">Q 0</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ⑨ Tasa de Interés -->
+<div class="card g-col-4">
+  <div class="card-header">
+    <div class="card-title">Tasa de Interés</div>
+    <div class="card-desc">Casos y capital (Q) por tasa de interés aplicada: 2.25%, 2.5%, 2.75% y 3%</div>
+  </div>
+  <div class="card-body">
+    <div style="display:flex;gap:8px;margin-bottom:12px;justify-content:center;flex-wrap:wrap;">
+      <button class="filter-btn-tasa" data-filter="diciembre">DIC 2025</button>
+      <button class="filter-btn-tasa" data-filter="enero">ENE 2026</button>
+      <button class="filter-btn-tasa active" data-filter="febrero">FEB 2026</button>
+      <button class="filter-btn-tasa" data-filter="todos">TODOS</button>
+    </div>
+    <div style="overflow-x:auto;">
+      <table style="width:100%;border-collapse:collapse;font-size:0.75rem;color:#283551;">
+        <thead>
+          <tr style="background:rgba(40,53,81,0.08);">
+            <th style="padding:8px 10px;text-align:left;font-size:0.72rem;color:#f39519;text-transform:uppercase;letter-spacing:1px;border-bottom:2px solid rgba(243,149,25,0.4);">Tasa</th>
+            <th style="padding:8px 10px;text-align:center;font-size:0.72rem;color:#f39519;text-transform:uppercase;letter-spacing:1px;border-bottom:2px solid rgba(243,149,25,0.4);">Casos</th>
+            <th style="padding:8px 10px;text-align:right;font-size:0.72rem;color:#f39519;text-transform:uppercase;letter-spacing:1px;border-bottom:2px solid rgba(243,149,25,0.4);">Capital</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.1);transition:background 0.2s;" onmouseover="this.style.background='rgba(243,149,25,0.1)'" onmouseout="this.style.background=''">
+            <td style="padding:10px;font-weight:700;color:#5dade2;font-size:0.85rem;">
+              <span style="font-size:1.2rem;margin-right:6px;">💵</span> 2.25%
+            </td>
+            <td style="padding:10px;text-align:center;font-weight:600;" id="tasa225Casos">23 casos</td>
+            <td style="padding:10px;text-align:right;color:#f39519;font-weight:700;" id="tasa225Capital">Q 2,491,250</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.1);transition:background 0.2s;" onmouseover="this.style.background='rgba(243,149,25,0.1)'" onmouseout="this.style.background=''">
+            <td style="padding:10px;font-weight:700;color:#5dade2;font-size:0.85rem;">
+              <span style="font-size:1.2rem;margin-right:6px;">💰</span> 2.5%
+            </td>
+            <td style="padding:10px;text-align:center;font-weight:600;" id="tasa25Casos">67 casos</td>
+            <td style="padding:10px;text-align:right;color:#f39519;font-weight:700;" id="tasa25Capital">Q 6,748,316</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.1);transition:background 0.2s;" onmouseover="this.style.background='rgba(243,149,25,0.1)'" onmouseout="this.style.background=''">
+            <td style="padding:10px;font-weight:700;color:#5dade2;font-size:0.85rem;">
+              <span style="font-size:1.2rem;margin-right:6px;">💸</span> 2.75%
+            </td>
+            <td style="padding:10px;text-align:center;font-weight:600;" id="tasa275Casos">62 casos</td>
+            <td style="padding:10px;text-align:right;color:#f39519;font-weight:700;" id="tasa275Capital">Q 4,349,987</td>
+          </tr>
+          <tr style="transition:background 0.2s;" onmouseover="this.style.background='rgba(243,149,25,0.1)'" onmouseout="this.style.background=''">
+            <td style="padding:10px;font-weight:700;color:#5dade2;font-size:0.85rem;">
+              <span style="font-size:1.2rem;margin-right:6px;">💳</span> 3%
+            </td>
+            <td style="padding:10px;text-align:center;font-weight:600;" id="tasa3Casos">8 casos</td>
+            <td style="padding:10px;text-align:right;color:#f39519;font-weight:700;" id="tasa3Capital">Q 879,898</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr style="border-top:2px solid #f39519;background:rgba(243,149,25,0.1);">
+            <td style="padding:10px;font-weight:800;color:#283551;text-transform:uppercase;font-size:0.75rem;letter-spacing:1px;">Total</td>
+            <td style="padding:10px;text-align:center;font-weight:800;color:#283551;" id="tasaTotalCasos">160 casos</td>
+            <td style="padding:10px;text-align:right;font-weight:800;color:#f39519;" id="tasaTotalCapital">Q 14,469,451</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ⑩ Avalúo -->
+<div class="card g-col-4">
+  <div class="card-header">
+    <div class="card-title">Avalúo</div>
+    <div class="card-desc">Casos, capital (Q) y suma de avalúo por categoría: menor 40%, mayor 40% y pendiente</div>
+  </div>
+  <div class="card-body">
+    <div style="display:flex;gap:8px;margin-bottom:12px;justify-content:center;flex-wrap:wrap;">
+      <button class="filter-btn-avaluo" data-filter="diciembre">DIC 2025</button>
+      <button class="filter-btn-avaluo" data-filter="enero">ENE 2026</button>
+      <button class="filter-btn-avaluo active" data-filter="febrero">FEB 2026</button>
+      <button class="filter-btn-avaluo" data-filter="todos">TODOS</button>
+    </div>
+    <div style="overflow-x:auto;">
+      <table style="width:100%;border-collapse:collapse;font-size:0.75rem;color:#283551;">
+        <thead>
+          <tr style="background:rgba(40,53,81,0.08);">
+            <th style="padding:8px 10px;text-align:left;font-size:0.72rem;color:#f39519;text-transform:uppercase;letter-spacing:1px;border-bottom:2px solid rgba(243,149,25,0.4);">Categoría</th>
+            <th style="padding:8px 10px;text-align:center;font-size:0.72rem;color:#f39519;text-transform:uppercase;letter-spacing:1px;border-bottom:2px solid rgba(243,149,25,0.4);">Casos</th>
+            <th style="padding:8px 10px;text-align:right;font-size:0.72rem;color:#f39519;text-transform:uppercase;letter-spacing:1px;border-bottom:2px solid rgba(243,149,25,0.4);">Capital</th>
+            <th style="padding:8px 10px;text-align:right;font-size:0.72rem;color:#f39519;text-transform:uppercase;letter-spacing:1px;border-bottom:2px solid rgba(243,149,25,0.4);">Avalúo</th>
+            <th style="padding:8px 10px;text-align:center;font-size:0.72rem;color:#f39519;text-transform:uppercase;letter-spacing:1px;border-bottom:2px solid rgba(243,149,25,0.4);">%</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.1);transition:background 0.2s;" onmouseover="this.style.background='rgba(82,113,255,0.1)'" onmouseout="this.style.background=''">
+            <td style="padding:10px;font-weight:700;color:#5dade2;font-size:0.85rem;">Menor 40%</td>
+            <td style="padding:10px;text-align:center;font-weight:600;" id="menorCasos">89 casos</td>
+            <td style="padding:10px;text-align:right;color:#f39519;font-weight:700;" id="menorCapital">Q 8,535,822</td>
+            <td style="padding:10px;text-align:right;color:#5271ff;font-weight:600;font-size:0.7rem;" id="menorAvaluo">Q 32,535,702</td>
+            <td style="padding:10px;text-align:center;font-weight:800;color:#5271ff;font-size:0.9rem;" id="menorPercent">56%</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.1);transition:background 0.2s;" onmouseover="this.style.background='rgba(243,149,25,0.1)'" onmouseout="this.style.background=''">
+            <td style="padding:10px;font-weight:700;color:#5dade2;font-size:0.85rem;">Mayor 40%</td>
+            <td style="padding:10px;text-align:center;font-weight:600;" id="mayorCasos">41 casos</td>
+            <td style="padding:10px;text-align:right;color:#f39519;font-weight:700;" id="mayorCapital">Q 3,821,998</td>
+            <td style="padding:10px;text-align:right;color:#f39519;font-weight:600;font-size:0.7rem;" id="mayorAvaluo">Q 6,230,690</td>
+            <td style="padding:10px;text-align:center;font-weight:800;color:#f39519;font-size:0.9rem;" id="mayorPercent">26%</td>
+          </tr>
+          <tr style="transition:background 0.2s;" onmouseover="this.style.background='rgba(142,68,173,0.1)'" onmouseout="this.style.background=''">
+            <td style="padding:10px;font-weight:700;color:#5dade2;font-size:0.85rem;">Pendiente</td>
+            <td style="padding:10px;text-align:center;font-weight:600;" id="pendienteCasos">30 casos</td>
+            <td style="padding:10px;text-align:right;color:#f39519;font-weight:700;" id="pendienteCapital">Q 2,111,632</td>
+            <td style="padding:10px;text-align:right;color:#78909c;font-weight:600;font-size:0.7rem;font-style:italic;">Sin avalúo</td>
+            <td style="padding:10px;text-align:center;font-weight:800;color:#8e44ad;font-size:0.9rem;" id="pendientePercent">19%</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr style="border-top:2px solid #f39519;background:rgba(243,149,25,0.1);">
+            <td style="padding:10px;font-weight:800;color:#283551;text-transform:uppercase;font-size:0.75rem;letter-spacing:1px;">Total</td>
+            <td style="padding:10px;text-align:center;font-weight:800;color:#283551;" id="avaluoTotalCasos">160 casos</td>
+            <td style="padding:10px;text-align:right;font-weight:800;color:#f39519;" id="avaluoTotalCapital">Q 14,469,452</td>
+            <td style="padding:10px;text-align:right;font-weight:800;color:#5271ff;font-size:0.7rem;" id="avaluoTotalAvaluo">Q 38,766,392</td>
+            <td style="padding:10px;text-align:center;font-weight:800;color:#283551;font-size:0.9rem;">100%</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
 </div>
 
 </main>
+
+</div>
+<!-- END PAGE 1 -->
+
+<!-- PAGE 2 - Detalle Adicional -->
+<div class="page-view" id="page2">
+
+<div class="kpi-strip">
+  <div class="kpi-item"><div class="kpi-top-bar"></div><div class="kpi-label">Promedio Capital</div><div class="kpi-value">Q 90,413</div><div class="kpi-sub">Por caso en mora</div></div>
+  <div class="kpi-item"><div class="kpi-top-bar"></div><div class="kpi-label">Tasa Promedio</div><div class="kpi-value">2.48<span>%</span></div><div class="kpi-sub">Tasa de interés ponderada</div></div>
+  <div class="kpi-item"><div class="kpi-top-bar"></div><div class="kpi-label">Recuperación</div><div class="kpi-value">Q 3.2M</div><div class="kpi-sub">Meta mensual proyectada</div></div>
+  <div class="kpi-item"><div class="kpi-top-bar"></div><div class="kpi-label">Avalúos Pendientes</div><div class="kpi-value">30<span>casos</span></div><div class="kpi-sub">Requieren valoración</div></div>
+  <div class="kpi-item"><div class="kpi-top-bar"></div><div class="kpi-label">Cobertura Avalúo</div><div class="kpi-value">82%</div><div class="kpi-sub">Casos con aval vigente</div></div>
+</div>
+
+<main>
+
+<!-- Cartera por Departamento -->
+<div class="card g-col-4">
+  <div class="card-header">
+    <div class="card-title">Cartera por Departamento</div>
+    <div class="card-desc">Distribución de casos en mora por ubicación geográfica</div>
+  </div>
+  <div class="card-body">
+    <div style="display:flex;gap:8px;margin-bottom:12px;justify-content:center;flex-wrap:wrap;">
+      <button class="filter-btn-depto" data-filter="diciembre">DIC 2025</button>
+      <button class="filter-btn-depto" data-filter="enero">ENE 2026</button>
+      <button class="filter-btn-depto active" data-filter="febrero">FEB 2026</button>
+    </div>
+    <div style="overflow-x:auto;">
+      <table style="width:100%;border-collapse:collapse;font-size:0.78rem;color:#283551;max-width:900px;margin:0 auto;">
+        <thead>
+          <tr style="background:rgba(0,0,0,0.35);">
+            <th style="padding:10px 12px;text-align:left;font-size:0.75rem;color:#f39519;text-transform:uppercase;letter-spacing:1px;border-bottom:2px solid rgba(243,149,25,0.4);">Departamento</th>
+            <th style="padding:10px 12px;text-align:center;font-size:0.75rem;color:#f39519;text-transform:uppercase;letter-spacing:1px;border-bottom:2px solid rgba(243,149,25,0.4);">Casos</th>
+            <th style="padding:10px 12px;text-align:center;font-size:0.75rem;color:#f39519;text-transform:uppercase;letter-spacing:1px;border-bottom:2px solid rgba(243,149,25,0.4);">%</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.1);transition:background 0.2s;" onmouseover="this.style.background='rgba(193,219,2,0.1)'" onmouseout="this.style.background=''">
+            <td style="padding:12px;font-weight:700;color:#5dade2;font-size:0.88rem;">
+              <span style="font-size:1.3rem;margin-right:8px;">🏔️</span> Alta Verapaz
+            </td>
+            <td style="padding:12px;text-align:center;font-weight:700;font-size:1.1rem;color:#283551;" id="deptoAltaVerapaz">85</td>
+            <td style="padding:12px;text-align:center;font-weight:800;color:#c1db02;font-size:1rem;" id="deptoAltaVerapazPct">53.13%</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.1);transition:background 0.2s;" onmouseover="this.style.background='rgba(243,149,25,0.1)'" onmouseout="this.style.background=''">
+            <td style="padding:12px;font-weight:700;color:#5dade2;font-size:0.88rem;">
+              <span style="font-size:1.3rem;margin-right:8px;">🏖️</span> Escuintla
+            </td>
+            <td style="padding:12px;text-align:center;font-weight:700;font-size:1.1rem;color:#283551;" id="deptoEscuintla">29</td>
+            <td style="padding:12px;text-align:center;font-weight:800;color:#f39519;font-size:1rem;" id="deptoEscuintlaPct">18.13%</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.1);transition:background 0.2s;" onmouseover="this.style.background='rgba(82,113,255,0.1)'" onmouseout="this.style.background=''">
+            <td style="padding:12px;font-weight:700;color:#5dade2;font-size:0.88rem;">
+              <span style="font-size:1.3rem;margin-right:8px;">🏙️</span> Guatemala
+            </td>
+            <td style="padding:12px;text-align:center;font-weight:700;font-size:1.1rem;color:#283551;" id="deptoGuatemala">21</td>
+            <td style="padding:12px;text-align:center;font-weight:800;color:#5271ff;font-size:1rem;" id="deptoGuatemalaPct">13.13%</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.1);transition:background 0.2s;" onmouseover="this.style.background='rgba(39,174,96,0.1)'" onmouseout="this.style.background=''">
+            <td style="padding:12px;font-weight:700;color:#5dade2;font-size:0.88rem;">
+              <span style="font-size:1.3rem;margin-right:8px;">🌳</span> El Petén
+            </td>
+            <td style="padding:12px;text-align:center;font-weight:700;font-size:1.1rem;color:#283551;" id="deptoPeten">13</td>
+            <td style="padding:12px;text-align:center;font-weight:800;color:#27ae60;font-size:1rem;" id="deptoPetenPct">8.13%</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.1);transition:background 0.2s;" onmouseover="this.style.background='rgba(255,152,0,0.1)'" onmouseout="this.style.background=''">
+            <td style="padding:12px;font-weight:700;color:#5dade2;font-size:0.88rem;">
+              <span style="font-size:1.3rem;margin-right:8px;">🌴</span> Suchitepéquez
+            </td>
+            <td style="padding:12px;text-align:center;font-weight:700;font-size:1.1rem;color:#283551;" id="deptoSuchitepequez">5</td>
+            <td style="padding:12px;text-align:center;font-weight:800;color:#ff9800;font-size:1rem;" id="deptoSuchitepequezPct">3.13%</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.1);transition:background 0.2s;" onmouseover="this.style.background='rgba(156,39,176,0.1)'" onmouseout="this.style.background=''">
+            <td style="padding:12px;font-weight:700;color:#5dade2;font-size:0.88rem;">
+              <span style="font-size:1.3rem;margin-right:8px;">🗻</span> Baja Verapaz
+            </td>
+            <td style="padding:12px;text-align:center;font-weight:700;font-size:1.1rem;color:#283551;" id="deptoBajaVerapaz">3</td>
+            <td style="padding:12px;text-align:center;font-weight:800;color:#9c27b0;font-size:1rem;" id="deptoBajaVerapazPct">1.88%</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.1);transition:background 0.2s;" onmouseover="this.style.background='rgba(0,150,136,0.1)'" onmouseout="this.style.background=''">
+            <td style="padding:12px;font-weight:700;color:#5dade2;font-size:0.88rem;">
+              <span style="font-size:1.3rem;margin-right:8px;">🌊</span> Retalhuleu
+            </td>
+            <td style="padding:12px;text-align:center;font-weight:700;font-size:1.1rem;color:#283551;" id="deptoRetalhuleu">2</td>
+            <td style="padding:12px;text-align:center;font-weight:800;color:#009688;font-size:1rem;" id="deptoRetalhuleuPct">1.25%</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.1);transition:background 0.2s;" onmouseover="this.style.background='rgba(233,30,99,0.1)'" onmouseout="this.style.background=''">
+            <td style="padding:12px;font-weight:700;color:#5dade2;font-size:0.88rem;">
+              <span style="font-size:1.3rem;margin-right:8px;">🌸</span> Santa Rosa
+            </td>
+            <td style="padding:12px;text-align:center;font-weight:700;font-size:1.1rem;color:#283551;" id="deptoSantaRosa">1</td>
+            <td style="padding:12px;text-align:center;font-weight:800;color:#e91e63;font-size:1rem;" id="deptoSantaRosaPct">0.63%</td>
+          </tr>
+          <tr style="transition:background 0.2s;" onmouseover="this.style.background='rgba(96,125,139,0.1)'" onmouseout="this.style.background=''">
+            <td style="padding:12px;font-weight:700;color:#5dade2;font-size:0.88rem;">
+              <span style="font-size:1.3rem;margin-right:8px;">⛰️</span> Huehuetenango
+            </td>
+            <td style="padding:12px;text-align:center;font-weight:700;font-size:1.1rem;color:#283551;" id="deptoHuehuetenango">1</td>
+            <td style="padding:12px;text-align:center;font-weight:800;color:#607d8b;font-size:1rem;" id="deptoHuehuetenangoct">0.63%</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr style="border-top:2px solid #f39519;background:rgba(243,149,25,0.15);">
+            <td style="padding:12px;font-weight:800;color:#283551;text-transform:uppercase;font-size:0.82rem;letter-spacing:1.5px;">Total General</td>
+            <td style="padding:12px;text-align:center;font-weight:900;color:#f39519;font-size:1.2rem;" id="deptoTotal">160</td>
+            <td style="padding:12px;text-align:center;font-weight:900;color:#283551;font-size:1.1rem;">100%</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Cartera por Rango vs Departamento -->
+<div class="card g-col-8">
+  <div class="card-header" style="padding:6px 12px;">
+    <div class="card-title" style="font-size:0.95rem;">Cartera por Rango vs Departamento</div>
+    <div class="card-desc" style="font-size:0.68rem;margin-top:2px;">Distribución porcentual de casos en mora por rango de días y ubicación geográfica</div>
+  </div>
+  <div class="card-body" style="padding:8px 12px;">
+    <div style="display:flex;gap:6px;margin-bottom:6px;justify-content:center;flex-wrap:wrap;">
+      <button class="filter-btn-rango" data-filter="diciembre">DIC 2025</button>
+      <button class="filter-btn-rango active" data-filter="enero">ENE 2026</button>
+      <button class="filter-btn-rango" data-filter="febrero">FEB 2026</button>
+    </div>
+    <div style="overflow-x:auto;">
+      <table style="width:100%;border-collapse:collapse;font-size:0.58rem;color:#283551;max-width:1100px;margin:0 auto;">
+        <thead>
+          <tr style="background:rgba(0,0,0,0.35);">
+            <th style="padding:4px 6px;text-align:left;font-size:0.58rem;color:#f39519;text-transform:uppercase;letter-spacing:0.5px;border-bottom:2px solid rgba(243,149,25,0.4);">Rango / Departamento</th>
+            <th style="padding:4px 6px;text-align:center;font-size:0.58rem;color:#f39519;text-transform:uppercase;letter-spacing:0.5px;border-bottom:2px solid rgba(243,149,25,0.4);">%</th>
+          </tr>
+        </thead>
+        <tbody id="rangoDeptoTableBody">
+          <!-- Filled by JavaScript -->
+        </tbody>
+        <tfoot>
+          <tr style="border-top:2px solid #f39519;background:rgba(243,149,25,0.15);">
+            <td style="padding:5px;font-weight:800;color:#283551;text-transform:uppercase;font-size:0.62rem;letter-spacing:0.8px;">Total General</td>
+            <td style="padding:5px;text-align:center;font-weight:900;color:#283551;font-size:0.75rem;">100.00%</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>
+
+</main>
+
+</div>
+<!-- END PAGE 2 -->
 
 
 <script>
@@ -411,9 +796,9 @@ Chart.defaults.color='#aab8c2';
 Chart.defaults.font.family="'Barlow', sans-serif";
 Chart.defaults.font.size=12;
 
-const C={orange:'#fe4100',lime:'#c1db02',olive:'#99b01e',teal:'#2eccc5',blue:'#4a90d9',white:'#ffffff',muted:'#8fa8bc',navy:'#283551'};
-const gC='rgba(255,255,255,0.06)';
-const aC='rgba(255,255,255,0.2)';
+const C={orange:'#fe4100',lime:'#c1db02',olive:'#99b01e',teal:'#2eccc5',blue:'#4a90d9',white:'#ffffff',muted:'#5a6c7d',navy:'#283551'};
+const gC='rgba(40,53,81,0.1)';
+const aC='rgba(40,53,81,0.25)';
 
 function fmtQ(v){
   if(v>=1e6) return 'Q'+(v/1e6).toFixed(2)+'M';
@@ -490,245 +875,911 @@ const labelPlugin={
   }
 };
 
-// ── 1. Capital y Casos ──
-new Chart(document.getElementById('c1'),{
-  type:'bar',
-  data:{
-    labels:['Diciembre 2025','Enero 2026'],
-    datasets:[
-      {
-        type:'bar',label:'Capital (Q)',
-        data:[13492368,14264657],
-        backgroundColor:['rgba(153,176,30,0.82)','rgba(254,65,0,0.86)'],
-        borderRadius:{topLeft:9,topRight:9},barPercentage:0.52,
-        yAxisID:'y',order:2
-      },
-      {
-        type:'line',label:'Cantidad de Casos',
-        data:[150,157],
-        borderColor:C.lime,backgroundColor:'rgba(193,219,2,0.06)',
-        borderWidth:2.5,fill:true,tension:0.45,
-        pointStyle:'circle',pointRadius:0,
-        yAxisID:'y2',order:1
-      }
-    ]
-  },
-  plugins:[labelPlugin],
-  options:{
-    responsive:true,maintainAspectRatio:false,
-    plugins:{legend:{labels:{color:C.white,boxWidth:14,padding:14,font:{size:13}}},tooltip:{mode:'index'}},
-    scales:{
-      x:baseX(),
-      y:{...baseY(v=>'Q'+(v>=1e6?(v/1e6).toFixed(1)+'M':(v/1e3).toFixed(0)+'K')),position:'left',
-         title:{display:true,text:'Capital (Q)',color:C.muted,font:{size:10}}},
-      y2:{grid:{display:false},ticks:{color:C.lime},border:{color:'transparent'},position:'right',
-          min:140,max:165,title:{display:true,text:'Casos',color:C.lime,font:{size:10}}}
-    }
-  }
-});
-
 // ── 2. Casos por Rango ──
-new Chart(document.getElementById('c2'),{
+const rangoData = {
+  labels:['Diciembre 2025','Enero 2026','Febrero 2026'],
+  datasets:[
+    {label:'Al día',       data:[98,88,87],   backgroundColor:'#5271ff', borderRadius:6, borderSkipped:false, datalabels:{display:true,color:'#283551',font:{weight:'700',size:13},anchor:'end',align:'top',offset:4}},
+    {label:'1 a 30 días',  data:[3,9,7],      backgroundColor:'#f39519', borderRadius:6, borderSkipped:false, datalabels:{display:true,color:'#283551',font:{weight:'700',size:13},anchor:'end',align:'top',offset:4}},
+    {label:'31 a 60 días', data:[9,8,15],     backgroundColor:'#27ae60', borderRadius:6, borderSkipped:false, datalabels:{display:true,color:'#283551',font:{weight:'700',size:13},anchor:'end',align:'top',offset:4}},
+    {label:'61 a 90 días', data:[2,5,4],      backgroundColor:'#ff9800', borderRadius:6, borderSkipped:false, datalabels:{display:true,color:'#283551',font:{weight:'700',size:13},anchor:'end',align:'top',offset:4}},
+    {label:'Prejurídico',  data:[12,21,21],   backgroundColor:'#e84545', borderRadius:6, borderSkipped:false, datalabels:{display:true,color:'#283551',font:{weight:'700',size:13},anchor:'end',align:'top',offset:4}},
+    {label:'Jurídico',     data:[26,26,26],   backgroundColor:'#8e44ad', borderRadius:6, borderSkipped:false, datalabels:{display:true,color:'#283551',font:{weight:'700',size:13},anchor:'end',align:'top',offset:4}},
+  ]
+};
+
+const rangoChart = new Chart(document.getElementById('c2'),{
   type:'bar',
-  data:{
-    labels:['Diciembre 2025','Enero 2026'],
-    datasets:[
-      {label:'0–30 días', data:[102,96], backgroundColor:'rgba(74,144,217,0.85)',borderRadius:5},
-      {label:'31–60 días',data:[9,8],   backgroundColor:'rgba(153,176,30,0.85)',borderRadius:5},
-      {label:'61–90 días',data:[2,5],   backgroundColor:'rgba(46,204,197,0.85)',borderRadius:5},
-      {label:'Mayor a 90',data:[37,48], backgroundColor:'rgba(254,65,0,0.85)',  borderRadius:5},
-    ]
-  },
-  plugins:[labelPlugin],
+  data:rangoData,
+  plugins:[ChartDataLabels],
   options:{
     responsive:true,maintainAspectRatio:false,
-    plugins:{legend:{labels:{color:C.white,boxWidth:12,padding:12}},tooltip:{mode:'index'}},
+    plugins:{legend:{labels:{color:'#283551',boxWidth:12,padding:10,font:{size:11}}},tooltip:{mode:'index'},datalabels:{}},
     scales:{x:baseX(),y:baseY()}
   }
 });
 
-// ── 4. Segmento ── plugin propio con etiquetas más grandes y con fondo
-const segmentoLabelPlugin = {
-  id:'segmentoLabels',
-  afterDatasetsDraw(chart){
-    const{ctx}=chart;
-    const barMeta = chart.getDatasetMeta(0);
-    const lineMeta = chart.getDatasetMeta(1);
-    const barData  = chart.data.datasets[0].data;
-    const lineData = chart.data.datasets[1].data;
-    const bgColors = chart.data.datasets[0].backgroundColor;
+// Filtro de meses para rango de días con botones
+document.querySelectorAll('.filter-btn').forEach(btn=>{
+  btn.addEventListener('click',function(){
+    // Remover clase active de todos los botones
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    // Agregar clase active al botón clickeado
+    this.classList.add('active');
+    
+    const val=this.dataset.filter;
+    if(val==='todos'){
+      rangoChart.data.labels=['Diciembre 2025','Enero 2026','Febrero 2026'];
+      rangoChart.data.datasets[0].data=[98,88,87];
+      rangoChart.data.datasets[1].data=[3,9,7];
+      rangoChart.data.datasets[2].data=[9,8,15];
+      rangoChart.data.datasets[3].data=[2,5,4];
+      rangoChart.data.datasets[4].data=[12,21,21];
+      rangoChart.data.datasets[5].data=[26,26,26];
+    }else if(val==='diciembre'){
+      rangoChart.data.labels=['Diciembre 2025'];
+      rangoChart.data.datasets[0].data=[98];
+      rangoChart.data.datasets[1].data=[3];
+      rangoChart.data.datasets[2].data=[9];
+      rangoChart.data.datasets[3].data=[2];
+      rangoChart.data.datasets[4].data=[12];
+      rangoChart.data.datasets[5].data=[26];
+    }else if(val==='enero'){
+      rangoChart.data.labels=['Enero 2026'];
+      rangoChart.data.datasets[0].data=[88];
+      rangoChart.data.datasets[1].data=[9];
+      rangoChart.data.datasets[2].data=[8];
+      rangoChart.data.datasets[3].data=[5];
+      rangoChart.data.datasets[4].data=[21];
+      rangoChart.data.datasets[5].data=[26];
+    }else if(val==='febrero'){
+      rangoChart.data.labels=['Febrero 2026'];
+      rangoChart.data.datasets[0].data=[87];
+      rangoChart.data.datasets[1].data=[7];
+      rangoChart.data.datasets[2].data=[15];
+      rangoChart.data.datasets[3].data=[4];
+      rangoChart.data.datasets[4].data=[21];
+      rangoChart.data.datasets[5].data=[26];
+    }
+    rangoChart.update();
+  });
+});
 
-    // ── Etiquetas de barra: fondo del mismo color de la barra, texto negro/blanco ──
-    barMeta.data.forEach((el,j)=>{
-      const raw = barData[j];
-      if(!raw||raw===0) return;
-      const lbl = fmtQ(raw);
-      const cp  = el.getCenterPoint();
-      const barColor = Array.isArray(bgColors) ? bgColors[j] : bgColors;
+// ── 2B. Porcentaje Rango de Días ──
+const rangoPctData = {
+  labels:['Diciembre 2025','Enero 2026','Febrero 2026'],
+  datasets:[
+    {label:'Al día',       data:[65.33,56.05,54.38], backgroundColor:'#5271ff', borderRadius:6, borderSkipped:false, datalabels:{display:true,color:'#283551',font:{weight:'700',size:14},anchor:'end',align:'end',rotation:-90,offset:4,formatter:v=>v.toFixed(1)+'%'}},
+    {label:'1 a 30 días',  data:[2.00,5.73,4.38],    backgroundColor:'#f39519', borderRadius:6, borderSkipped:false, datalabels:{display:true,color:'#283551',font:{weight:'700',size:14},anchor:'end',align:'end',rotation:-90,offset:4,formatter:v=>v.toFixed(1)+'%'}},
+    {label:'31 a 60 días', data:[6.00,5.10,9.38],    backgroundColor:'#27ae60', borderRadius:6, borderSkipped:false, datalabels:{display:true,color:'#283551',font:{weight:'700',size:14},anchor:'end',align:'end',rotation:-90,offset:4,formatter:v=>v.toFixed(1)+'%'}},
+    {label:'61 a 90 días', data:[1.33,3.18,2.50],    backgroundColor:'#ff9800', borderRadius:6, borderSkipped:false, datalabels:{display:true,color:'#283551',font:{weight:'700',size:14},anchor:'end',align:'end',rotation:-90,offset:4,formatter:v=>v.toFixed(1)+'%'}},
+    {label:'Prejurídico',  data:[8.00,13.38,13.13],  backgroundColor:'#e84545', borderRadius:6, borderSkipped:false, datalabels:{display:true,color:'#283551',font:{weight:'700',size:14},anchor:'end',align:'end',rotation:-90,offset:4,formatter:v=>v.toFixed(1)+'%'}},
+    {label:'Jurídico',     data:[17.33,16.56,16.25], backgroundColor:'#8e44ad', borderRadius:6, borderSkipped:false, datalabels:{display:true,color:'#283551',font:{weight:'700',size:14},anchor:'end',align:'end',rotation:-90,offset:4,formatter:v=>v.toFixed(1)+'%'}},
+  ]
+};
 
-      ctx.save();
-      ctx.font = '16px Barlow Condensed, sans-serif';
-      const tw = ctx.measureText(lbl).width;
-      const ph = 18, pw = tw + 12;
-      const bx = cp.x - pw/2;
-      const by = el.y - ph - 6;
+const rangoPctChart = new Chart(document.getElementById('c2b'),{
+  type:'bar',
+  data:rangoPctData,
+  plugins:[ChartDataLabels],
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{
+      legend:{labels:{color:'#283551',boxWidth:12,padding:10,font:{size:11}}},
+      tooltip:{
+        mode:'index',
+        callbacks:{
+          label:function(context){
+            return context.dataset.label + ': ' + context.parsed.y.toFixed(2) + '%';
+          }
+        }
+      },
+      datalabels:{}
+    },
+    scales:{
+      x:baseX(),
+      y:{...baseY(v=>v.toFixed(0)+'%'),max:100}
+    }
+  }
+});
 
-      // píldora con color de la barra
-      ctx.fillStyle = barColor.replace(/[\d.]+\)$/, '1)'); // full opacity
-      ctx.beginPath();
-      ctx.roundRect(bx, by, pw, ph, 4);
-      ctx.fill();
+// Filtro de meses para porcentaje rango de días con botones
+document.querySelectorAll('.filter-btn-pct').forEach(btn=>{
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('.filter-btn-pct').forEach(b=>b.classList.remove('active'));
+    this.classList.add('active');
+    
+    const val=this.dataset.filter;
+    if(val==='todos'){
+      rangoPctChart.data.labels=['Diciembre 2025','Enero 2026','Febrero 2026'];
+      rangoPctChart.data.datasets[0].data=[65.33,56.05,54.38];
+      rangoPctChart.data.datasets[1].data=[2.00,5.73,4.38];
+      rangoPctChart.data.datasets[2].data=[6.00,5.10,9.38];
+      rangoPctChart.data.datasets[3].data=[1.33,3.18,2.50];
+      rangoPctChart.data.datasets[4].data=[8.00,13.38,13.13];
+      rangoPctChart.data.datasets[5].data=[17.33,16.56,16.25];
+    }else if(val==='diciembre'){
+      rangoPctChart.data.labels=['Diciembre 2025'];
+      rangoPctChart.data.datasets[0].data=[65.33];
+      rangoPctChart.data.datasets[1].data=[2.00];
+      rangoPctChart.data.datasets[2].data=[6.00];
+      rangoPctChart.data.datasets[3].data=[1.33];
+      rangoPctChart.data.datasets[4].data=[8.00];
+      rangoPctChart.data.datasets[5].data=[17.33];
+    }else if(val==='enero'){
+      rangoPctChart.data.labels=['Enero 2026'];
+      rangoPctChart.data.datasets[0].data=[56.05];
+      rangoPctChart.data.datasets[1].data=[5.73];
+      rangoPctChart.data.datasets[2].data=[5.10];
+      rangoPctChart.data.datasets[3].data=[3.18];
+      rangoPctChart.data.datasets[4].data=[13.38];
+      rangoPctChart.data.datasets[5].data=[16.56];
+    }else if(val==='febrero'){
+      rangoPctChart.data.labels=['Febrero 2026'];
+      rangoPctChart.data.datasets[0].data=[54.38];
+      rangoPctChart.data.datasets[1].data=[4.38];
+      rangoPctChart.data.datasets[2].data=[9.38];
+      rangoPctChart.data.datasets[3].data=[2.50];
+      rangoPctChart.data.datasets[4].data=[13.13];
+      rangoPctChart.data.datasets[5].data=[16.25];
+    }
+    rangoPctChart.update();
+  });
+});
 
-      // texto negro con sombra oscura
-      ctx.shadowColor = 'rgba(0,0,0,0.7)';
-      ctx.shadowBlur = 3;
-      ctx.fillStyle = '#000';
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.fillText(lbl, cp.x, by + ph/2);
-      ctx.restore();
-    });
+// ── Función auxiliar para formatear capital ──
+function formatCapital(num) {
+  return 'Q ' + num.toLocaleString('es-GT');
+}
 
-    // ── Etiquetas de línea: diamante + % grande, fondo oscuro, alterna arriba/abajo ──
-    lineMeta.data.forEach((el,j)=>{
-      const raw = lineData[j];
-      if(raw===null||raw===undefined) return;
-      const lbl = raw + '%';
-      const offsetY = -38;
-
-      ctx.save();
-      // diamante
-      ctx.fillStyle = C.lime;
-      ctx.beginPath();
-      ctx.moveTo(el.x,    el.y - 11);
-      ctx.lineTo(el.x+9,  el.y);
-      ctx.lineTo(el.x,    el.y + 11);
-      ctx.lineTo(el.x-9,  el.y);
-      ctx.closePath();
-      ctx.fill();
-
-      // píldora fondo oscuro para el %
-      ctx.font = 'bold 16px Barlow Condensed, sans-serif';
-      const tw2 = ctx.measureText(lbl).width;
-      const ph2=20, pw2=tw2+14;
-      const tx = el.x - pw2/2;
-      const ty = el.y + offsetY - (offsetY<0 ? ph2 : 0);
-
-      ctx.fillStyle = 'rgba(20,30,40,0.85)';
-      ctx.beginPath();
-      ctx.roundRect(tx, ty, pw2, ph2, 4);
-      ctx.fill();
-
-      ctx.fillStyle = C.lime;
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.fillText(lbl, el.x, ty + ph2/2);
-
-      // línea guía
-      ctx.beginPath();
-      ctx.strokeStyle = 'rgba(193,219,2,0.4)';
-      ctx.lineWidth = 0.9;
-      ctx.setLineDash([2,3]);
-      ctx.moveTo(el.x, offsetY<0 ? el.y-11 : el.y+11);
-      ctx.lineTo(el.x, ty + (offsetY<0 ? ph2+2 : -2));
-      ctx.stroke();
-      ctx.restore();
-    });
+// ── SEGMENTO DATA ──
+const segmentoData = {
+  diciembre: {
+    oro: { casos: 5, capital: 571405 },
+    plata: { casos: 6, capital: 756882 },
+    sin: { casos: 139, capital: 12164081 },
+    adjudicacion: { casos: 0, capital: 0 },
+    reestructura: { casos: 0, capital: 0 },
+    traslado: { casos: 0, capital: 0 }
+  },
+  enero: {
+    oro: { casos: 11, capital: 1101126 },
+    plata: { casos: 7, capital: 884201 },
+    sin: { casos: 126, capital: 10866722 },
+    adjudicacion: { casos: 6, capital: 660023 },
+    reestructura: { casos: 6, capital: 597229 },
+    traslado: { casos: 1, capital: 155356 }
+  },
+  febrero: {
+    oro: { casos: 14, capital: 1358523 },
+    plata: { casos: 7, capital: 957770 },
+    sin: { casos: 139, capital: 12153158 },
+    adjudicacion: { casos: 0, capital: 0 },
+    reestructura: { casos: 0, capital: 0 },
+    traslado: { casos: 0, capital: 0 }
+  },
+  todos: {
+    oro: { casos: 30, capital: 3031054 },
+    plata: { casos: 20, capital: 2598853 },
+    sin: { casos: 404, capital: 35183961 },
+    adjudicacion: { casos: 6, capital: 660023 },
+    reestructura: { casos: 6, capital: 597229 },
+    traslado: { casos: 1, capital: 155356 }
   }
 };
 
-new Chart(document.getElementById('c4'),{
-  type:'bar',
-  data:{
-    labels:['Adjudicación','Anterior','Oro','Plata','Reestructura','Traslado','(en blanco)'],
-    datasets:[
+function updateSegmento(mes) {
+  const data = segmentoData[mes];
+  document.getElementById('oroCasos').textContent = data.oro.casos + ' casos';
+  document.getElementById('oroCapital').textContent = formatCapital(data.oro.capital);
+  
+  document.getElementById('plataCasos').textContent = data.plata.casos + ' casos';
+  document.getElementById('plataCapital').textContent = formatCapital(data.plata.capital);
+  
+  document.getElementById('sinCasos').textContent = data.sin.casos + ' casos';
+  document.getElementById('sinCapital').textContent = formatCapital(data.sin.capital);
+  
+  document.getElementById('adjudicacionCasos').textContent = data.adjudicacion.casos + ' casos';
+  document.getElementById('adjudicacionCapital').textContent = formatCapital(data.adjudicacion.capital);
+  
+  document.getElementById('reestructuraCasos').textContent = data.reestructura.casos + ' casos';
+  document.getElementById('reestructuraCapital').textContent = formatCapital(data.reestructura.capital);
+  
+  document.getElementById('trasladoCasos').textContent = data.traslado.casos + ' casos';
+  document.getElementById('trasladoCapital').textContent = formatCapital(data.traslado.capital);
+}
+
+document.querySelectorAll('.filter-btn-segmento').forEach(btn=>{
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('.filter-btn-segmento').forEach(b=>b.classList.remove('active'));
+    this.classList.add('active');
+    updateSegmento(this.dataset.filter);
+  });
+});
+
+// ── TASA DE INTERES DATA ──
+const tasaData = {
+  diciembre: {
+    tasa225: { casos: 23, capital: 2484498 },
+    tasa25: { casos: 58, capital: 5893440 },
+    tasa275: { casos: 61, capital: 4251026 },
+    tasa3: { casos: 8, capital: 863403 }
+  },
+  enero: {
+    tasa225: { casos: 23, capital: 2505300 },
+    tasa25: { casos: 64, capital: 6552245 },
+    tasa275: { casos: 62, capital: 4323177 },
+    tasa3: { casos: 8, capital: 883935 }
+  },
+  febrero: {
+    tasa225: { casos: 23, capital: 2491250 },
+    tasa25: { casos: 67, capital: 6748316 },
+    tasa275: { casos: 62, capital: 4349987 },
+    tasa3: { casos: 8, capital: 879898 }
+  },
+  todos: {
+    tasa225: { casos: 69, capital: 7481048 },
+    tasa25: { casos: 189, capital: 19194001 },
+    tasa275: { casos: 185, capital: 12924190 },
+    tasa3: { casos: 24, capital: 2627236 }
+  }
+};
+
+function updateTasa(mes) {
+  const data = tasaData[mes];
+  document.getElementById('tasa225Casos').textContent = data.tasa225.casos + ' casos';
+  document.getElementById('tasa225Capital').textContent = formatCapital(data.tasa225.capital);
+  
+  document.getElementById('tasa25Casos').textContent = data.tasa25.casos + ' casos';
+  document.getElementById('tasa25Capital').textContent = formatCapital(data.tasa25.capital);
+  
+  document.getElementById('tasa275Casos').textContent = data.tasa275.casos + ' casos';
+  document.getElementById('tasa275Capital').textContent = formatCapital(data.tasa275.capital);
+  
+  document.getElementById('tasa3Casos').textContent = data.tasa3.casos + ' casos';
+  document.getElementById('tasa3Capital').textContent = formatCapital(data.tasa3.capital);
+  
+  // Calcular totales
+  const totalCasos = data.tasa225.casos + data.tasa25.casos + data.tasa275.casos + data.tasa3.casos;
+  const totalCapital = data.tasa225.capital + data.tasa25.capital + data.tasa275.capital + data.tasa3.capital;
+  document.getElementById('tasaTotalCasos').textContent = totalCasos + ' casos';
+  document.getElementById('tasaTotalCapital').textContent = formatCapital(totalCapital);
+}
+
+document.querySelectorAll('.filter-btn-tasa').forEach(btn=>{
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('.filter-btn-tasa').forEach(b=>b.classList.remove('active'));
+    this.classList.add('active');
+    updateTasa(this.dataset.filter);
+  });
+});
+
+// ── AVALUO DATA ──
+const avaluoData = {
+  diciembre: {
+    menor: { casos: 84, capital: 8085633, avaluo: 30861595 },
+    mayor: { casos: 36, capital: 3434635, avaluo: 5604298 },
+    pendiente: { casos: 30, capital: 1972099, avaluo: 0 }
+  },
+  enero: {
+    menor: { casos: 92, capital: 8858092, avaluo: 33787925 },
+    mayor: { casos: 35, capital: 3360365, avaluo: 5478965 },
+    pendiente: { casos: 30, capital: 2046200, avaluo: 0 }
+  },
+  febrero: {
+    menor: { casos: 89, capital: 8535822, avaluo: 32535702 },
+    mayor: { casos: 41, capital: 3821998, avaluo: 6230690 },
+    pendiente: { casos: 30, capital: 2111632, avaluo: 0 }
+  },
+  todos: {
+    menor: { casos: 265, capital: 25479547, avaluo: 97185222 },
+    mayor: { casos: 112, capital: 10616998, avaluo: 17313953 },
+    pendiente: { casos: 90, capital: 6129931, avaluo: 0 }
+  }
+};
+
+function updateAvaluo(mes) {
+  const data = avaluoData[mes];
+  const total = data.menor.casos + data.mayor.casos + data.pendiente.casos;
+  
+  const menorPct = Math.round((data.menor.casos / total) * 100);
+  const mayorPct = Math.round((data.mayor.casos / total) * 100);
+  const pendientePct = Math.round((data.pendiente.casos / total) * 100);
+  
+  document.getElementById('menorCasos').textContent = data.menor.casos + ' casos';
+  document.getElementById('menorCapital').textContent = formatCapital(data.menor.capital);
+  document.getElementById('menorAvaluo').textContent = formatCapital(data.menor.avaluo);
+  document.getElementById('menorPercent').textContent = menorPct + '%';
+  
+  document.getElementById('mayorCasos').textContent = data.mayor.casos + ' casos';
+  document.getElementById('mayorCapital').textContent = formatCapital(data.mayor.capital);
+  document.getElementById('mayorAvaluo').textContent = formatCapital(data.mayor.avaluo);
+  document.getElementById('mayorPercent').textContent = mayorPct + '%';
+  
+  document.getElementById('pendienteCasos').textContent = data.pendiente.casos + ' casos';
+  document.getElementById('pendienteCapital').textContent = formatCapital(data.pendiente.capital);
+  document.getElementById('pendientePercent').textContent = pendientePct + '%';
+  
+  // Calcular totales
+  const totalCasos = total;
+  const totalCapital = data.menor.capital + data.mayor.capital + data.pendiente.capital;
+  const totalAvaluo = data.menor.avaluo + data.mayor.avaluo;
+  document.getElementById('avaluoTotalCasos').textContent = totalCasos + ' casos';
+  document.getElementById('avaluoTotalCapital').textContent = formatCapital(totalCapital);
+  document.getElementById('avaluoTotalAvaluo').textContent = formatCapital(totalAvaluo);
+}
+
+document.querySelectorAll('.filter-btn-avaluo').forEach(btn=>{
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('.filter-btn-avaluo').forEach(b=>b.classList.remove('active'));
+    this.classList.add('active');
+    updateAvaluo(this.dataset.filter);
+  });
+});
+
+// ── AVALÚOS PENDIENTES ──────────────────────────────────────────────────────
+const avaluoPendData = {
+  diciembre: {
+    labels: ['2024', '2025'],
+    casos: [18, 51],
+    capital: [1077806.92, 4982263.14]
+  },
+  enero: {
+    labels: ['2024', '2025', '2026'],
+    casos: [17, 51, 3],
+    capital: [980757.77, 4963683.73, 226108.80]
+  }
+};
+
+let avaluoPendChart = new Chart(document.getElementById('avaluoPendChart'), {
+  type: 'bar',
+  data: {
+    labels: avaluoPendData.enero.labels,
+    datasets: [
       {
-        type:'bar',label:'Capital (Q)',
-        data:[660023,10867652,1101126,837965,642534,155356,13492368],
-        backgroundColor:['rgba(46,204,197,0.85)','rgba(254,65,0,0.88)','rgba(193,219,2,0.85)','rgba(74,144,217,0.85)','rgba(153,176,30,0.85)','rgba(140,160,185,0.85)','rgba(193,219,2,0.92)'],
-        borderRadius:5,yAxisID:'y',order:2
+        label: 'Casos',
+        data: avaluoPendData.enero.casos,
+        backgroundColor: '#5271ff',
+        borderRadius: 6,
+        yAxisID: 'y'
       },
       {
-        type:'line',label:'% Capital',
-        data:[2.4,39.2,4.0,3.0,2.3,0.6,48.6],
-        borderColor:C.lime,backgroundColor:'transparent',borderWidth:2.2,
-        pointStyle:'circle',pointRadius:0,tension:0.35,
-        yAxisID:'y2',order:1
+        label: 'Capital (Q)',
+        data: avaluoPendData.enero.capital,
+        backgroundColor: '#f39519',
+        borderRadius: 6,
+        yAxisID: 'y1'
       }
     ]
   },
-  plugins:[segmentoLabelPlugin],
-  options:{
-    layout:{ padding:{ top:50 } },
-    responsive:true,maintainAspectRatio:false,
-    plugins:{legend:{labels:{color:C.white,boxWidth:12,padding:14}},tooltip:{mode:'index'}},
-    scales:{
-      x:baseX(),
-      y:{...baseY(v=>'Q'+(v>=1e6?(v/1e6).toFixed(1)+'M':(v/1e3).toFixed(0)+'K')),position:'left'},
-      y2:{grid:{display:false},ticks:{color:C.lime,callback:v=>v+'%'},border:{color:'transparent'},position:'right'}
+  plugins: [ChartDataLabels],
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    layout: {
+      padding: {
+        top: 35,
+        bottom: 5
+      }
+    },
+    plugins: {
+      legend: {
+        position: 'bottom',
+        align: 'center',
+        labels: { 
+          color: '#283551', 
+          boxWidth: 12, 
+          padding: 10, 
+          font: { size: 11 },
+          useBorderRadius: true,
+          borderRadius: 3
+        }
+      },
+      datalabels: {
+        clip: false,
+        display: true,
+        color: '#283551',
+        font: { weight: '700', size: 11 },
+        anchor: 'end',
+        align: 'top',
+        offset: 4,
+        formatter: (value, ctx) => {
+          if (ctx.datasetIndex === 1) {
+            return 'Q ' + value.toLocaleString('es-GT', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+          }
+          return value;
+        }
+      }
+    },
+    scales: {
+      x: {
+        grid: { color: 'rgba(40,53,81,0.1)' },
+        ticks: { color: '#5a6c7d', font: { size: 11 } },
+        border: { color: 'rgba(40,53,81,0.25)' }
+      },
+      y: {
+        type: 'linear',
+        position: 'left',
+        grid: { color: 'rgba(40,53,81,0.1)' },
+        ticks: { color: '#5a6c7d', font: { size: 11 } },
+        border: { color: 'rgba(40,53,81,0.25)' },
+        title: { display: true, text: 'Casos', color: '#5271ff', font: { weight: '700', size: 12 } }
+      },
+      y1: {
+        type: 'linear',
+        position: 'right',
+        grid: { display: false },
+        ticks: { 
+          color: '#5a6c7d', 
+          font: { size: 11 },
+          callback: function(value) {
+            return 'Q ' + (value / 1000).toFixed(0) + 'K';
+          }
+        },
+        border: { color: 'rgba(40,53,81,0.25)' },
+        title: { display: true, text: 'Capital (Q)', color: '#f39519', font: { weight: '700', size: 12 } }
+      }
     }
   }
 });
 
-// ── 7. Cosecha → Barras agrupadas + línea curva encima ──
-new Chart(document.getElementById('c7'),{
-  type:'bar',
-  data:{
-    labels:['2024','2025','2026'],
-    datasets:[
-      {type:'bar',label:'0–30 días', data:[23,160,15],backgroundColor:'rgba(74,144,217,0.85)',borderRadius:4},
-      {type:'bar',label:'31–60 días',data:[5,12,0],  backgroundColor:'rgba(153,176,30,0.85)',borderRadius:4},
-      {type:'bar',label:'61–90 días',data:[2,5,0],   backgroundColor:'rgba(46,204,197,0.85)',borderRadius:4},
-      {type:'bar',label:'+90 días',  data:[44,41,0],  backgroundColor:'rgba(254,65,0,0.85)',  borderRadius:4},
-      {
-        type:'line',label:'Total casos',
-        data:[74,218,15],
-        borderColor:C.lime,backgroundColor:'rgba(193,219,2,0.08)',
-        borderWidth:2.5,fill:false,tension:0.45,
-        pointStyle:'circle',pointRadius:0,
-        yAxisID:'y',order:1
-      }
-    ]
-  },
-  plugins:[labelPlugin],
-  options:{
-    responsive:true,maintainAspectRatio:false,
-    plugins:{legend:{labels:{color:C.white,boxWidth:12,padding:9,font:{size:10}}},tooltip:{mode:'index'}},
-    scales:{x:baseX(),y:{...baseY(),min:0}}
-  }
+function updateAvaluoPend(filter) {
+  const data = avaluoPendData[filter];
+  avaluoPendChart.data.labels = data.labels;
+  avaluoPendChart.data.datasets[0].data = data.casos;
+  avaluoPendChart.data.datasets[1].data = data.capital;
+  avaluoPendChart.update();
+}
+
+document.querySelectorAll('.filter-btn-avaluopend').forEach(btn=>{
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('.filter-btn-avaluopend').forEach(b=>b.classList.remove('active'));
+    this.classList.add('active');
+    updateAvaluoPend(this.dataset.filter);
+  });
 });
 
-// ── 8. Estado: etiquetas bien separadas ──
-new Chart(document.getElementById('c8'),{
-  type:'bar',
-  data:{
-    labels:['Cobro Administrativo','Cobro Judicial','Vigentes en Mora'],
-    datasets:[
-      {
-        label:'Capital (Q)',data:[1893358,4843215,21020452],
-        backgroundColor:['rgba(193,219,2,0.85)','rgba(153,176,30,0.85)','rgba(254,65,0,0.9)'],
-        borderRadius:6,yAxisID:'y',order:2
-      },
-      {
-        type:'line',label:'% Capital',data:[6.8,17.4,75.7],
-        borderColor:C.lime,backgroundColor:'transparent',borderWidth:2.5,
-        pointStyle:'circle',pointRadius:0,tension:0.4,
-        yAxisID:'y2',order:1
-      }
-    ]
+// ── PAGE NAVIGATION ──────────────────────────────────────────────────────────
+function switchPage(pageNum) {
+  // Ocultar todas las páginas
+  document.querySelectorAll('.page-view').forEach(page => {
+    page.classList.remove('active');
+  });
+  
+  // Mostrar la página seleccionada
+  document.getElementById('page' + pageNum).classList.add('active');
+  
+  // Actualizar botones de navegación
+  document.querySelectorAll('.page-nav-btn').forEach((btn, index) => {
+    if (index + 1 === pageNum) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  });
+}
+
+// ── PÁGINA 2 ──────────────────────────────────────────────────────────────
+// ── RANGO VS DEPARTAMENTO DATA ──────────────────────────────────────────────
+const rangoDeptoData = {
+  diciembre: {
+    alDia: { total: 65.33, deptos: [
+      { nombre: 'Alta Verapaz', emoji: '🏔️', pct: 24.67 },
+      { nombre: 'Baja Verapaz', emoji: '🗻', pct: 1.33 },
+      { nombre: 'El Petén', emoji: '🌳', pct: 6.00 },
+      { nombre: 'Escuintla', emoji: '🏖️', pct: 15.33 },
+      { nombre: 'Guatemala', emoji: '🏙️', pct: 12.00 },
+      { nombre: 'Huehuetenango', emoji: '⛰️', pct: 0.67 },
+      { nombre: 'Retalhuleu', emoji: '🌊', pct: 1.33 },
+      { nombre: 'Santa Rosa', emoji: '🌸', pct: 0.67 },
+      { nombre: 'Suchitepéquez', emoji: '🌴', pct: 3.33 }
+    ]},
+    r1a30: { total: 2.00, deptos: [
+      { nombre: 'Alta Verapaz', emoji: '🏔️', pct: 0.67 },
+      { nombre: 'Baja Verapaz', emoji: '🗻', pct: 0.67 },
+      { nombre: 'Escuintla', emoji: '🏖️', pct: 0.67 }
+    ]},
+    r31a60: { total: 6.00, deptos: [
+      { nombre: 'Alta Verapaz', emoji: '🏔️', pct: 4.67 },
+      { nombre: 'Guatemala', emoji: '🏙️', pct: 1.33 }
+    ]},
+    r61a90: { total: 1.33, deptos: [
+      { nombre: 'Alta Verapaz', emoji: '🏔️', pct: 0.67 },
+      { nombre: 'Guatemala', emoji: '🏙️', pct: 0.67 }
+    ]},
+    prejuridico: { total: 8.00, deptos: [
+      { nombre: 'Alta Verapaz', emoji: '🏔️', pct: 8.00 }
+    ]},
+    juridico: { total: 17.33, deptos: [
+      { nombre: 'Alta Verapaz', emoji: '🏔️', pct: 17.33 }
+    ]}
   },
-  plugins:[labelPlugin],
-  options:{
-    responsive:true,maintainAspectRatio:false,
-    plugins:{legend:{labels:{color:C.white,boxWidth:12,padding:14}},tooltip:{mode:'index'}},
-    scales:{
-      x:baseX(),
-      y:{...baseY(v=>'Q'+(v>=1e6?(v/1e6).toFixed(1)+'M':(v/1e3).toFixed(0)+'K')),position:'left'},
-      y2:{grid:{display:false},ticks:{color:C.lime,callback:v=>v+'%'},border:{color:'transparent'},position:'right'}
+  enero: {
+    alDia: { total: 56.05, deptos: [
+      { nombre: 'Alta Verapaz', emoji: '🏔️', pct: 19.75 },
+      { nombre: 'Baja Verapaz', emoji: '🗻', pct: 0.64 },
+      { nombre: 'El Petén', emoji: '🌳', pct: 7.01 },
+      { nombre: 'Escuintla', emoji: '🏖️', pct: 14.01 },
+      { nombre: 'Guatemala', emoji: '🏙️', pct: 8.92 },
+      { nombre: 'Huehuetenango', emoji: '⛰️', pct: 0.64 },
+      { nombre: 'Retalhuleu', emoji: '🌊', pct: 1.27 },
+      { nombre: 'Santa Rosa', emoji: '🌸', pct: 0.64 },
+      { nombre: 'Suchitepéquez', emoji: '🌴', pct: 3.18 }
+    ]},
+    r1a30: { total: 5.73, deptos: [
+      { nombre: 'Alta Verapaz', emoji: '🏔️', pct: 2.55 },
+      { nombre: 'El Petén', emoji: '🌳', pct: 0.64 },
+      { nombre: 'Escuintla', emoji: '🏖️', pct: 1.27 },
+      { nombre: 'Guatemala', emoji: '🏙️', pct: 1.27 }
+    ]},
+    r31a60: { total: 5.10, deptos: [
+      { nombre: 'Alta Verapaz', emoji: '🏔️', pct: 1.91 },
+      { nombre: 'Baja Verapaz', emoji: '🗻', pct: 0.64 },
+      { nombre: 'Escuintla', emoji: '🏖️', pct: 1.27 },
+      { nombre: 'Guatemala', emoji: '🏙️', pct: 1.27 }
+    ]},
+    r61a90: { total: 3.18, deptos: [
+      { nombre: 'Alta Verapaz', emoji: '🏔️', pct: 1.91 },
+      { nombre: 'Baja Verapaz', emoji: '🗻', pct: 0.64 },
+      { nombre: 'Guatemala', emoji: '🏙️', pct: 0.64 }
+    ]},
+    prejuridico: { total: 13.38, deptos: [
+      { nombre: 'Alta Verapaz', emoji: '🏔️', pct: 11.46 },
+      { nombre: 'Escuintla', emoji: '🏖️', pct: 0.64 },
+      { nombre: 'Guatemala', emoji: '🏙️', pct: 1.27 }
+    ]},
+    juridico: { total: 16.56, deptos: [
+      { nombre: 'Alta Verapaz', emoji: '🏔️', pct: 16.56 }
+    ]}
+  },
+  febrero: {
+    alDia: { total: 54.38, deptos: [
+      { nombre: 'Alta Verapaz', emoji: '🏔️', pct: 16.88 },
+      { nombre: 'Baja Verapaz', emoji: '🗻', pct: 0.63 },
+      { nombre: 'El Petén', emoji: '🌳', pct: 6.88 },
+      { nombre: 'Escuintla', emoji: '🏖️', pct: 15.00 },
+      { nombre: 'Guatemala', emoji: '🏙️', pct: 9.38 },
+      { nombre: 'Huehuetenango', emoji: '⛰️', pct: 0.63 },
+      { nombre: 'Retalhuleu', emoji: '🌊', pct: 1.25 },
+      { nombre: 'Santa Rosa', emoji: '🌸', pct: 0.63 },
+      { nombre: 'Suchitepéquez', emoji: '🌴', pct: 3.13 }
+    ]},
+    r1a30: { total: 4.38, deptos: [
+      { nombre: 'Alta Verapaz', emoji: '🏔️', pct: 3.13 },
+      { nombre: 'Escuintla', emoji: '🏖️', pct: 0.63 },
+      { nombre: 'Guatemala', emoji: '🏙️', pct: 0.63 }
+    ]},
+    r31a60: { total: 9.38, deptos: [
+      { nombre: 'Alta Verapaz', emoji: '🏔️', pct: 4.38 },
+      { nombre: 'Baja Verapaz', emoji: '🗻', pct: 0.63 },
+      { nombre: 'El Petén', emoji: '🌳', pct: 1.25 },
+      { nombre: 'Escuintla', emoji: '🏖️', pct: 1.25 },
+      { nombre: 'Guatemala', emoji: '🏙️', pct: 1.88 }
+    ]},
+    r61a90: { total: 2.50, deptos: [
+      { nombre: 'Alta Verapaz', emoji: '🏔️', pct: 0.63 },
+      { nombre: 'Baja Verapaz', emoji: '🗻', pct: 0.63 },
+      { nombre: 'Escuintla', emoji: '🏖️', pct: 1.25 }
+    ]},
+    prejuridico: { total: 13.13, deptos: [
+      { nombre: 'Alta Verapaz', emoji: '🏔️', pct: 11.88 },
+      { nombre: 'Guatemala', emoji: '🏙️', pct: 1.25 }
+    ]},
+    juridico: { total: 16.25, deptos: [
+      { nombre: 'Alta Verapaz', emoji: '🏔️', pct: 16.25 }
+    ]}
+  }
+};
+
+function updateRangoDepto(periodo) {
+  const data = rangoDeptoData[periodo];
+  const tbody = document.getElementById('rangoDeptoTableBody');
+  
+  let html = '';
+  
+  // Al día
+  html += `<tr style="background:rgba(39,174,96,0.2);border-bottom:1px solid rgba(39,174,96,0.4);">
+    <td style="padding:4px 6px;font-weight:800;color:#27ae60;font-size:0.62rem;text-transform:uppercase;letter-spacing:0.5px;">
+      <span style="font-size:0.75rem;margin-right:4px;">✅</span> Al día
+    </td>
+    <td style="padding:4px 6px;text-align:center;font-weight:900;color:#27ae60;font-size:0.72rem;">${data.alDia.total.toFixed(2)}%</td>
+  </tr>`;
+  data.alDia.deptos.forEach(d => {
+    html += `<tr style="border-bottom:1px solid rgba(255,255,255,0.04);transition:background 0.2s;" onmouseover="this.style.background='rgba(39,174,96,0.05)'" onmouseout="this.style.background=''">
+      <td style="padding:3px 3px 3px 15px;color:#aab8c2;font-size:0.58rem;">
+        <span style="font-size:0.7rem;margin-right:3px;">${d.emoji}</span> ${d.nombre}
+      </td>
+      <td style="padding:3px;text-align:center;color:#283551;font-size:0.62rem;font-weight:600;">${d.pct.toFixed(2)}%</td>
+    </tr>`;
+  });
+  
+  // 1 a 30
+  html += `<tr style="background:rgba(82,113,255,0.2);border-bottom:1px solid rgba(82,113,255,0.4);">
+    <td style="padding:4px 6px;font-weight:800;color:#5271ff;font-size:0.62rem;text-transform:uppercase;letter-spacing:0.5px;">
+      <span style="font-size:0.75rem;margin-right:4px;">📅</span> 1 a 30 días
+    </td>
+    <td style="padding:4px 6px;text-align:center;font-weight:900;color:#5271ff;font-size:0.72rem;">${data.r1a30.total.toFixed(2)}%</td>
+  </tr>`;
+  data.r1a30.deptos.forEach(d => {
+    html += `<tr style="border-bottom:1px solid rgba(255,255,255,0.04);transition:background 0.2s;" onmouseover="this.style.background='rgba(82,113,255,0.05)'" onmouseout="this.style.background=''">
+      <td style="padding:3px 3px 3px 15px;color:#aab8c2;font-size:0.58rem;">
+        <span style="font-size:0.7rem;margin-right:3px;">${d.emoji}</span> ${d.nombre}
+      </td>
+      <td style="padding:3px;text-align:center;color:#283551;font-size:0.62rem;font-weight:600;">${d.pct.toFixed(2)}%</td>
+    </tr>`;
+  });
+  
+  // 31 a 60
+  html += `<tr style="background:rgba(243,149,25,0.2);border-bottom:1px solid rgba(243,149,25,0.4);">
+    <td style="padding:4px 6px;font-weight:800;color:#f39519;font-size:0.62rem;text-transform:uppercase;letter-spacing:0.5px;">
+      <span style="font-size:0.75rem;margin-right:4px;">⚠️</span> 31 a 60 días
+    </td>
+    <td style="padding:4px 6px;text-align:center;font-weight:900;color:#f39519;font-size:0.72rem;">${data.r31a60.total.toFixed(2)}%</td>
+  </tr>`;
+  data.r31a60.deptos.forEach(d => {
+    html += `<tr style="border-bottom:1px solid rgba(255,255,255,0.04);transition:background 0.2s;" onmouseover="this.style.background='rgba(243,149,25,0.05)'" onmouseout="this.style.background=''">
+      <td style="padding:3px 3px 3px 15px;color:#aab8c2;font-size:0.58rem;">
+        <span style="font-size:0.7rem;margin-right:3px;">${d.emoji}</span> ${d.nombre}
+      </td>
+      <td style="padding:3px;text-align:center;color:#283551;font-size:0.62rem;font-weight:600;">${d.pct.toFixed(2)}%</td>
+    </tr>`;
+  });
+  
+  // 61 a 90
+  html += `<tr style="background:rgba(255,152,0,0.2);border-bottom:1px solid rgba(255,152,0,0.4);">
+    <td style="padding:4px 6px;font-weight:800;color:#ff9800;font-size:0.62rem;text-transform:uppercase;letter-spacing:0.5px;">
+      <span style="font-size:0.75rem;margin-right:4px;">🔔</span> 61 a 90 días
+    </td>
+    <td style="padding:4px 6px;text-align:center;font-weight:900;color:#ff9800;font-size:0.72rem;">${data.r61a90.total.toFixed(2)}%</td>
+  </tr>`;
+  data.r61a90.deptos.forEach(d => {
+    html += `<tr style="border-bottom:1px solid rgba(255,255,255,0.04);transition:background 0.2s;" onmouseover="this.style.background='rgba(255,152,0,0.05)'" onmouseout="this.style.background=''">
+      <td style="padding:3px 3px 3px 15px;color:#aab8c2;font-size:0.58rem;">
+        <span style="font-size:0.7rem;margin-right:3px;">${d.emoji}</span> ${d.nombre}
+      </td>
+      <td style="padding:3px;text-align:center;color:#283551;font-size:0.62rem;font-weight:600;">${d.pct.toFixed(2)}%</td>
+    </tr>`;
+  });
+  
+  // Prejurídico
+  html += `<tr style="background:rgba(231,76,60,0.2);border-bottom:1px solid rgba(231,76,60,0.4);">
+    <td style="padding:4px 6px;font-weight:800;color:#e74c3c;font-size:0.62rem;text-transform:uppercase;letter-spacing:0.5px;">
+      <span style="font-size:0.75rem;margin-right:4px;">⚖️</span> Prejurídico
+    </td>
+    <td style="padding:4px 6px;text-align:center;font-weight:900;color:#e74c3c;font-size:0.72rem;">${data.prejuridico.total.toFixed(2)}%</td>
+  </tr>`;
+  data.prejuridico.deptos.forEach(d => {
+    html += `<tr style="border-bottom:1px solid rgba(255,255,255,0.04);transition:background 0.2s;" onmouseover="this.style.background='rgba(231,76,60,0.05)'" onmouseout="this.style.background=''">
+      <td style="padding:3px 3px 3px 15px;color:#aab8c2;font-size:0.58rem;">
+        <span style="font-size:0.7rem;margin-right:3px;">${d.emoji}</span> ${d.nombre}
+      </td>
+      <td style="padding:3px;text-align:center;color:#283551;font-size:0.62rem;font-weight:600;">${d.pct.toFixed(2)}%</td>
+    </tr>`;
+  });
+  
+  // Jurídico
+  html += `<tr style="background:rgba(142,68,173,0.2);border-bottom:1px solid rgba(142,68,173,0.4);">
+    <td style="padding:4px 6px;font-weight:800;color:#8e44ad;font-size:0.62rem;text-transform:uppercase;letter-spacing:0.5px;">
+      <span style="font-size:0.75rem;margin-right:4px;">⚖️</span> Jurídico
+    </td>
+    <td style="padding:4px 6px;text-align:center;font-weight:900;color:#8e44ad;font-size:0.72rem;">${data.juridico.total.toFixed(2)}%</td>
+  </tr>`;
+  data.juridico.deptos.forEach(d => {
+    html += `<tr style="border-bottom:1px solid rgba(255,255,255,0.04);transition:background 0.2s;" onmouseover="this.style.background='rgba(142,68,173,0.05)'" onmouseout="this.style.background=''">
+      <td style="padding:3px 3px 3px 15px;color:#aab8c2;font-size:0.58rem;">
+        <span style="font-size:0.7rem;margin-right:3px;">${d.emoji}</span> ${d.nombre}
+      </td>
+      <td style="padding:3px;text-align:center;color:#283551;font-size:0.62rem;font-weight:600;">${d.pct.toFixed(2)}%</td>
+    </tr>`;
+  });
+  
+  tbody.innerHTML = html;
+}
+
+// Initial load
+updateRangoDepto('enero');
+
+// Filter button listeners
+document.querySelectorAll('.filter-btn-rango').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.filter-btn-rango').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    updateRangoDepto(btn.getAttribute('data-filter'));
+  });
+});
+
+// ── DEPARTAMENTOS DATA ──────────────────────────────────────────────────────
+const deptoData = {
+  diciembre: {
+    altaVerapaz: { casos: 84, pct: 56.00 },
+    escuintla: { casos: 24, pct: 16.00 },
+    guatemala: { casos: 21, pct: 14.00 },
+    peten: { casos: 9, pct: 6.00 },
+    suchitepequez: { casos: 5, pct: 3.33 },
+    bajaVerapaz: { casos: 3, pct: 2.00 },
+    retalhuleu: { casos: 2, pct: 1.33 },
+    santaRosa: { casos: 1, pct: 0.67 },
+    huehuetenango: { casos: 1, pct: 0.67 },
+    total: 150
+  },
+  enero: {
+    altaVerapaz: { casos: 85, pct: 54.14 },
+    escuintla: { casos: 27, pct: 17.20 },
+    guatemala: { casos: 21, pct: 13.38 },
+    peten: { casos: 12, pct: 7.64 },
+    suchitepequez: { casos: 5, pct: 3.18 },
+    bajaVerapaz: { casos: 3, pct: 1.91 },
+    retalhuleu: { casos: 2, pct: 1.27 },
+    santaRosa: { casos: 1, pct: 0.64 },
+    huehuetenango: { casos: 1, pct: 0.64 },
+    total: 157
+  },
+  febrero: {
+    altaVerapaz: { casos: 85, pct: 53.13 },
+    escuintla: { casos: 29, pct: 18.13 },
+    guatemala: { casos: 21, pct: 13.13 },
+    peten: { casos: 13, pct: 8.13 },
+    suchitepequez: { casos: 5, pct: 3.13 },
+    bajaVerapaz: { casos: 3, pct: 1.88 },
+    retalhuleu: { casos: 2, pct: 1.25 },
+    santaRosa: { casos: 1, pct: 0.63 },
+    huehuetenango: { casos: 1, pct: 0.63 },
+    total: 160
+  }
+};
+
+function updateDepto(mes) {
+  const data = deptoData[mes];
+  document.getElementById('deptoAltaVerapaz').textContent = data.altaVerapaz.casos;
+  document.getElementById('deptoAltaVerapazPct').textContent = data.altaVerapaz.pct.toFixed(2) + '%';
+  
+  document.getElementById('deptoEscuintla').textContent = data.escuintla.casos;
+  document.getElementById('deptoEscuintlaPct').textContent = data.escuintla.pct.toFixed(2) + '%';
+  
+  document.getElementById('deptoGuatemala').textContent = data.guatemala.casos;
+  document.getElementById('deptoGuatemalaPct').textContent = data.guatemala.pct.toFixed(2) + '%';
+  
+  document.getElementById('deptoPeten').textContent = data.peten.casos;
+  document.getElementById('deptoPetenPct').textContent = data.peten.pct.toFixed(2) + '%';
+  
+  document.getElementById('deptoSuchitepequez').textContent = data.suchitepequez.casos;
+  document.getElementById('deptoSuchitepequezPct').textContent = data.suchitepequez.pct.toFixed(2) + '%';
+  
+  document.getElementById('deptoBajaVerapaz').textContent = data.bajaVerapaz.casos;
+  document.getElementById('deptoBajaVerapazPct').textContent = data.bajaVerapaz.pct.toFixed(2) + '%';
+  
+  document.getElementById('deptoRetalhuleu').textContent = data.retalhuleu.casos;
+  document.getElementById('deptoRetalhuleuPct').textContent = data.retalhuleu.pct.toFixed(2) + '%';
+  
+  document.getElementById('deptoSantaRosa').textContent = data.santaRosa.casos;
+  document.getElementById('deptoSantaRosaPct').textContent = data.santaRosa.pct.toFixed(2) + '%';
+  
+  document.getElementById('deptoHuehuetenango').textContent = data.huehuetenango.casos;
+  document.getElementById('deptoHuehuetenangoct').textContent = data.huehuetenango.pct.toFixed(2) + '%';
+  
+  document.getElementById('deptoTotal').textContent = data.total;
+}
+
+document.querySelectorAll('.filter-btn-depto').forEach(btn=>{
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('.filter-btn-depto').forEach(b=>b.classList.remove('active'));
+    this.classList.add('active');
+    updateDepto(this.dataset.filter);
+  });
+});
+
+// ── GLOBAL FILTER CON MULTI-SELECT ──
+let globalSelectedMonths = ['enero']; // Por defecto enero seleccionado
+
+function updateGlobalFilter() {
+  const months = globalSelectedMonths;
+  
+  // Actualizar visuales de botones
+  document.querySelectorAll('.global-filter-btn').forEach(btn => {
+    if (months.includes(btn.dataset.month)) {
+      btn.classList.add('selected');
+    } else {
+      btn.classList.remove('selected');
+    }
+  });
+  
+  // Si solo 1 mes seleccionado, activar ese filtro en todos los gráficos
+  if (months.length === 1) {
+    const month = months[0];
+    // Activar filtros individuales
+    document.querySelectorAll('.filter-btn, .filter-btn-pct, .filter-btn-segmento, .filter-btn-tasa, .filter-btn-avaluo, .filter-btn-avaluopend, .filter-btn-depto, .filter-btn-rango').forEach(btn => {
+      if (btn.dataset.filter === month) {
+        btn.click();
+      }
+    });
+  }
+  // Si 2 meses seleccionados, mostrar comparativa
+  else if (months.length === 2) {
+    // Ordenar meses cronológicamente
+    const monthOrder = ['diciembre', 'enero', 'febrero'];
+    const sortedMonths = months.sort((a, b) => monthOrder.indexOf(a) - monthOrder.indexOf(b));
+    
+    // Para los gráficos que NO soportan comparación, mostrar el mes más reciente
+    const latestMonth = sortedMonths[sortedMonths.length - 1];
+    document.querySelectorAll('.filter-btn-segmento, .filter-btn-tasa, .filter-btn-avaluo, .filter-btn-avaluopend, .filter-btn-depto, .filter-btn-rango').forEach(btn => {
+      if (btn.dataset.filter === latestMonth) {
+        btn.click();
+      }
+    });
+    
+    // Actualizar gráficas de rango con 2 meses
+    if (typeof rangoChart !== 'undefined') {
+      const labels = sortedMonths.map(m => {
+        if (m === 'diciembre') return 'Diciembre 2025';
+        if (m === 'enero') return 'Enero 2026';
+        return 'Febrero 2026';
+      });
+      
+      rangoChart.data.labels = labels;
+      
+      const dataByMonth = {
+        diciembre: [98, 3, 9, 2, 12, 26],
+        enero: [88, 9, 8, 5, 21, 26],
+        febrero: [87, 7, 15, 4, 21, 26]
+      };
+      
+      for (let i = 0; i < 6; i++) {
+        rangoChart.data.datasets[i].data = sortedMonths.map(m => dataByMonth[m][i]);
+      }
+      rangoChart.update();
+    }
+    
+    // Similar para otros gráficos
+    if (typeof rangoPctChart !== 'undefined') {
+      const labels = sortedMonths.map(m => {
+        if (m === 'diciembre') return 'Diciembre 2025';
+        if (m === 'enero') return 'Enero 2026';
+        return 'Febrero 2026';
+      });
+      rangoPctChart.data.labels = labels;
+      
+      const pctDataByMonth = {
+        diciembre: [65.33, 2.00, 6.00, 1.33, 8.00, 17.33],
+        enero: [56.05, 5.73, 5.10, 3.18, 13.38, 16.56],
+        febrero: [54.38, 4.38, 9.38, 2.50, 13.13, 16.25]
+      };
+      
+      for (let i = 0; i < 6; i++) {
+        rangoPctChart.data.datasets[i].data = sortedMonths.map(m => pctDataByMonth[m][i]);
+      }
+      rangoPctChart.update();
     }
   }
+}
+
+document.querySelectorAll('.global-filter-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    const month = this.dataset.month;
+    
+    // Toggle selección
+    if (globalSelectedMonths.includes(month)) {
+      // Si ya está seleccionado, remover (pero solo si hay más de 1 seleccionado)
+      if (globalSelectedMonths.length > 1) {
+        globalSelectedMonths = globalSelectedMonths.filter(m => m !== month);
+      }
+    } else {
+      // Si no está seleccionado, agregar (pero máximo 2)
+      if (globalSelectedMonths.length < 2) {
+        globalSelectedMonths.push(month);
+      } else {
+        // Reemplazar el primero con el nuevo
+        globalSelectedMonths.shift();
+        globalSelectedMonths.push(month);
+      }
+    }
+    
+    updateGlobalFilter();
+  });
 });
+
+// Inicializar filtro global
+updateGlobalFilter();
+
 </script>
 </body>
 </html>
-
