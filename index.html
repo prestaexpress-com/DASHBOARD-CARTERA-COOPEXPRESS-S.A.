@@ -371,8 +371,7 @@
 
 <div class="kpi-strip">
   <div class="kpi-item"><div class="kpi-top-bar"></div><div class="kpi-label" id="kpiCapitalLabel">Capital Total Enero 2026</div><div class="kpi-value" id="kpiCapitalValue">Q 14,264,656.76</div><div class="kpi-sub" id="kpiCapitalSub">+5.7% vs mes anterior</div></div>
-  <div class="kpi-item"><div class="kpi-top-bar"></div><div class="kpi-label">Casos Activos</div><div class="kpi-value" id="kpiCasosValue">307 <span>casos</span></div><div class="kpi-sub">Cartera en mora activa</div></div>
-  <div class="kpi-item"><div class="kpi-top-bar"></div><div class="kpi-label">Vigentes en Mora</div><div class="kpi-value" id="kpiVigentesValue">215 <span id="kpiVigentesPct">75.7%</span></div><div class="kpi-sub">Del total de casos</div></div>
+  <div class="kpi-item"><div class="kpi-top-bar"></div><div class="kpi-label">Casos Activos</div><div class="kpi-value" id="kpiCasosValue">157 <span>casos</span></div><div class="kpi-sub">Cartera en mora activa</div></div>
 </div>
 
 <main>
@@ -1623,33 +1622,25 @@ const kpiData = {
     capitalLabel: 'Capital Total Diciembre 2025',
     capital: 'Q 13,492,367.62',
     capitalSub: 'Mes base',
-    casos: '294',
-    vigentes: '205',
-    vigentesPct: '69.7%'
+    casos: '150'
   },
   enero: {
     capitalLabel: 'Capital Total Enero 2026',
     capital: 'Q 14,264,656.76',
     capitalSub: '+5.7% vs mes anterior',
-    casos: '307',
-    vigentes: '215',
-    vigentesPct: '75.7%'
+    casos: '157'
   },
   febrero: {
     capitalLabel: 'Capital Total Febrero 2026',
     capital: 'Q 14,469,451.25',
     capitalSub: '+1.4% vs mes anterior',
-    casos: '318',
-    vigentes: '226',
-    vigentesPct: '71.1%'
+    casos: '160'
   },
   todos: {
     capitalLabel: 'Capital Total Acumulado',
     capital: 'Q 42,226,475.63',
     capitalSub: 'Diciembre 2025 → Febrero 2026',
-    casos: '919',
-    vigentes: '646',
-    vigentesPct: '70.3%'
+    casos: '467'
   }
 };
 
@@ -1675,8 +1666,6 @@ function updateKPIs(selectedMonths) {
     document.getElementById('kpiCapitalValue').textContent = data.capital;
     document.getElementById('kpiCapitalSub').textContent = data.capitalSub;
     document.getElementById('kpiCasosValue').innerHTML = data.casos + ' <span>casos</span>';
-    document.getElementById('kpiVigentesValue').textContent = data.vigentes + ' ';
-    document.getElementById('kpiVigentesPct').textContent = data.vigentesPct;
   }
 }
 
