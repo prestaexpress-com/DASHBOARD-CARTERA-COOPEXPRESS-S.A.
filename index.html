@@ -1,5 +1,7 @@
 
 
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -23,7 +25,7 @@
   /* ── HEADER ── */
   header{background:#283551;position:relative;overflow:hidden;}
   .header-inner{display:flex;align-items:center;justify-content:space-between;padding:20px 48px;position:relative;z-index:2;}
-  .header-title h1{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.8rem;color:#f39519;text-transform:uppercase;letter-spacing:3px;line-height:1;margin:0;}
+  .header-title h1{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.8rem;color:#ffffff;text-transform:uppercase;letter-spacing:3px;line-height:1;margin:0;}
   .header-buttons{display:flex;gap:12px;align-items:center;flex-wrap:wrap;}
 
   /* ── KPI STRIP ── */
@@ -67,6 +69,9 @@
   
   /* Cards en página 2 sin límite de ancho */
   #page2 .card{max-width:none;}
+  
+  /* Reducir espacio entre gráficas en página 2 */
+  #page2 main{gap:10px;}
 
   /* CARD HEADER oscuro */
   .card-header{background:transparent;margin:0;padding:10px 16px 9px;border-radius:0;}
@@ -150,7 +155,7 @@
   .segmento-icon{display:block;font-size:2.8rem;margin-bottom:8px;}
   .segmento-label{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.76rem;letter-spacing:2px;text-transform:uppercase;}
   .segmento-card.oro .segmento-label{color:#ffd54f;}
-  .segmento-card.plata .segmento-label{color:#e0e0e0;}
+  .segmento-card.plata .segmento-label{color:#000000;}
   .segmento-card.sin .segmento-label{color:#bdbdbd;}
   .segmento-card.adjudicacion .segmento-label{color:#ba68c8;}
   .segmento-card.reestructura .segmento-label{color:#26a69a;}
@@ -365,11 +370,9 @@
 <div class="page-view active" id="page1">
 
 <div class="kpi-strip">
-  <div class="kpi-item"><div class="kpi-top-bar"></div><div class="kpi-label" id="kpiCapitalLabel">Capital Total Enero 2026</div><div class="kpi-value" id="kpiCapitalValue">Q 27,757,024</div><div class="kpi-sub" id="kpiCapitalSub">+5.7% vs mes anterior</div></div>
+  <div class="kpi-item"><div class="kpi-top-bar"></div><div class="kpi-label" id="kpiCapitalLabel">Capital Total Enero 2026</div><div class="kpi-value" id="kpiCapitalValue">Q 14,264,656.76</div><div class="kpi-sub" id="kpiCapitalSub">+5.7% vs mes anterior</div></div>
   <div class="kpi-item"><div class="kpi-top-bar"></div><div class="kpi-label">Casos Activos</div><div class="kpi-value" id="kpiCasosValue">307 <span>casos</span></div><div class="kpi-sub">Cartera en mora activa</div></div>
   <div class="kpi-item"><div class="kpi-top-bar"></div><div class="kpi-label">Vigentes en Mora</div><div class="kpi-value" id="kpiVigentesValue">215 <span id="kpiVigentesPct">75.7%</span></div><div class="kpi-sub">Del total de casos</div></div>
-  <div class="kpi-item"><div class="kpi-top-bar"></div><div class="kpi-label">Destino Principal</div><div class="kpi-value" id="kpiDestinoValue">Consumo <span id="kpiDestinoPct">57.3%</span></div><div class="kpi-sub" id="kpiDestinoSub">196 casos · Q 15,894,570</div></div>
-  <div class="kpi-item"><div class="kpi-top-bar"></div><div class="kpi-label">Segmento Dominante</div><div class="kpi-value" id="kpiSegmentoValue">(en blanco) <span id="kpiSegmentoPct">48.6%</span></div><div class="kpi-sub" id="kpiSegmentoSub">150 casos · mayor participación</div></div>
 </div>
 
 <main>
@@ -418,6 +421,7 @@
     <div style="display:flex;gap:8px;margin-bottom:12px;justify-content:center;flex-wrap:wrap;">
       <button class="filter-btn-avaluopend" data-filter="diciembre">DIC 2025</button>
       <button class="filter-btn-avaluopend active" data-filter="enero">ENE 2026</button>
+      <button class="filter-btn-avaluopend" data-filter="febrero">FEB 2026</button>
     </div>
     <div class="chart-wrap"><canvas id="avaluoPendChart"></canvas></div>
   </div>
@@ -427,7 +431,7 @@
 <div class="card g-col-4">
   <div class="card-header">
     <div class="card-title">Detalle por Segmento</div>
-    <div class="card-desc">Casos y capital (Q) por clasificación: oro, plata, adjudicación, reestructura, traslado y sin segmento</div>
+    <div class="card-desc">Casos y capital (Q) por clasificación: oro, plata y sin segmento</div>
   </div>
   <div class="card-body">
     <div style="display:flex;gap:8px;margin-bottom:12px;justify-content:center;flex-wrap:wrap;">
@@ -462,33 +466,6 @@
         <div class="segmento-sep"></div>
         <div class="segmento-val" id="sinCasos">139 casos</div>
         <div class="segmento-val" id="sinCapital" style="font-size:0.82rem;margin-top:2px;">Q 12,153,158</div>
-      </div>
-
-      <!-- ADJUDICACION -->
-      <div class="segmento-card adjudicacion">
-        <img src="https://i.ibb.co/Y7C2BtMM/15719087.png" alt="Adjudicación" style="width:52px;height:52px;object-fit:contain;margin-bottom:8px;">
-        <div class="segmento-label">Adjudicación</div>
-        <div class="segmento-sep"></div>
-        <div class="segmento-val" id="adjudicacionCasos">0 casos</div>
-        <div class="segmento-val" id="adjudicacionCapital" style="font-size:0.82rem;margin-top:2px;">Q 0</div>
-      </div>
-
-      <!-- REESTRUCTURA -->
-      <div class="segmento-card reestructura">
-        <img src="https://i.ibb.co/RTT5RYc8/10729289.png" alt="Reestructura" style="width:52px;height:52px;object-fit:contain;margin-bottom:8px;">
-        <div class="segmento-label">Reestructura</div>
-        <div class="segmento-sep"></div>
-        <div class="segmento-val" id="reestructuraCasos">0 casos</div>
-        <div class="segmento-val" id="reestructuraCapital" style="font-size:0.82rem;margin-top:2px;">Q 0</div>
-      </div>
-
-      <!-- TRASLADO -->
-      <div class="segmento-card traslado">
-        <img src="https://i.ibb.co/yBdDRbWW/1123561.png" alt="Traslado" style="width:52px;height:52px;object-fit:contain;margin-bottom:8px;">
-        <div class="segmento-label">Traslado</div>
-        <div class="segmento-sep"></div>
-        <div class="segmento-val" id="trasladoCasos">0 casos</div>
-        <div class="segmento-val" id="trasladoCapital" style="font-size:0.82rem;margin-top:2px;">Q 0</div>
       </div>
     </div>
   </div>
@@ -627,14 +604,6 @@
 <!-- PAGE 2 - Detalle Adicional -->
 <div class="page-view" id="page2">
 
-<div class="kpi-strip">
-  <div class="kpi-item"><div class="kpi-top-bar"></div><div class="kpi-label">Promedio Capital</div><div class="kpi-value">Q 90,413</div><div class="kpi-sub">Por caso en mora</div></div>
-  <div class="kpi-item"><div class="kpi-top-bar"></div><div class="kpi-label">Tasa Promedio</div><div class="kpi-value">2.48<span>%</span></div><div class="kpi-sub">Tasa de interés ponderada</div></div>
-  <div class="kpi-item"><div class="kpi-top-bar"></div><div class="kpi-label">Recuperación</div><div class="kpi-value">Q 3.2M</div><div class="kpi-sub">Meta mensual proyectada</div></div>
-  <div class="kpi-item"><div class="kpi-top-bar"></div><div class="kpi-label">Avalúos Pendientes</div><div class="kpi-value">30<span>casos</span></div><div class="kpi-sub">Requieren valoración</div></div>
-  <div class="kpi-item"><div class="kpi-top-bar"></div><div class="kpi-label">Cobertura Avalúo</div><div class="kpi-value">82%</div><div class="kpi-sub">Casos con aval vigente</div></div>
-</div>
-
 <main>
 
 <!-- Cartera por Departamento -->
@@ -660,63 +629,63 @@
         </thead>
         <tbody>
           <tr style="border-bottom:1px solid rgba(255,255,255,0.1);transition:background 0.2s;" onmouseover="this.style.background='rgba(193,219,2,0.1)'" onmouseout="this.style.background=''">
-            <td style="padding:12px;font-weight:700;color:#5dade2;font-size:0.88rem;">
+            <td style="padding:12px;font-weight:700;color:#283551;font-size:0.88rem;">
               <span style="font-size:1.3rem;margin-right:8px;">🏔️</span> Alta Verapaz
             </td>
             <td style="padding:12px;text-align:center;font-weight:700;font-size:1.1rem;color:#283551;" id="deptoAltaVerapaz">85</td>
             <td style="padding:12px;text-align:center;font-weight:800;color:#c1db02;font-size:1rem;" id="deptoAltaVerapazPct">53.13%</td>
           </tr>
           <tr style="border-bottom:1px solid rgba(255,255,255,0.1);transition:background 0.2s;" onmouseover="this.style.background='rgba(243,149,25,0.1)'" onmouseout="this.style.background=''">
-            <td style="padding:12px;font-weight:700;color:#5dade2;font-size:0.88rem;">
+            <td style="padding:12px;font-weight:700;color:#283551;font-size:0.88rem;">
               <span style="font-size:1.3rem;margin-right:8px;">🏖️</span> Escuintla
             </td>
             <td style="padding:12px;text-align:center;font-weight:700;font-size:1.1rem;color:#283551;" id="deptoEscuintla">29</td>
             <td style="padding:12px;text-align:center;font-weight:800;color:#f39519;font-size:1rem;" id="deptoEscuintlaPct">18.13%</td>
           </tr>
           <tr style="border-bottom:1px solid rgba(255,255,255,0.1);transition:background 0.2s;" onmouseover="this.style.background='rgba(82,113,255,0.1)'" onmouseout="this.style.background=''">
-            <td style="padding:12px;font-weight:700;color:#5dade2;font-size:0.88rem;">
+            <td style="padding:12px;font-weight:700;color:#283551;font-size:0.88rem;">
               <span style="font-size:1.3rem;margin-right:8px;">🏙️</span> Guatemala
             </td>
             <td style="padding:12px;text-align:center;font-weight:700;font-size:1.1rem;color:#283551;" id="deptoGuatemala">21</td>
             <td style="padding:12px;text-align:center;font-weight:800;color:#5271ff;font-size:1rem;" id="deptoGuatemalaPct">13.13%</td>
           </tr>
           <tr style="border-bottom:1px solid rgba(255,255,255,0.1);transition:background 0.2s;" onmouseover="this.style.background='rgba(39,174,96,0.1)'" onmouseout="this.style.background=''">
-            <td style="padding:12px;font-weight:700;color:#5dade2;font-size:0.88rem;">
+            <td style="padding:12px;font-weight:700;color:#283551;font-size:0.88rem;">
               <span style="font-size:1.3rem;margin-right:8px;">🌳</span> El Petén
             </td>
             <td style="padding:12px;text-align:center;font-weight:700;font-size:1.1rem;color:#283551;" id="deptoPeten">13</td>
             <td style="padding:12px;text-align:center;font-weight:800;color:#27ae60;font-size:1rem;" id="deptoPetenPct">8.13%</td>
           </tr>
           <tr style="border-bottom:1px solid rgba(255,255,255,0.1);transition:background 0.2s;" onmouseover="this.style.background='rgba(255,152,0,0.1)'" onmouseout="this.style.background=''">
-            <td style="padding:12px;font-weight:700;color:#5dade2;font-size:0.88rem;">
+            <td style="padding:12px;font-weight:700;color:#283551;font-size:0.88rem;">
               <span style="font-size:1.3rem;margin-right:8px;">🌴</span> Suchitepéquez
             </td>
             <td style="padding:12px;text-align:center;font-weight:700;font-size:1.1rem;color:#283551;" id="deptoSuchitepequez">5</td>
             <td style="padding:12px;text-align:center;font-weight:800;color:#ff9800;font-size:1rem;" id="deptoSuchitepequezPct">3.13%</td>
           </tr>
           <tr style="border-bottom:1px solid rgba(255,255,255,0.1);transition:background 0.2s;" onmouseover="this.style.background='rgba(156,39,176,0.1)'" onmouseout="this.style.background=''">
-            <td style="padding:12px;font-weight:700;color:#5dade2;font-size:0.88rem;">
+            <td style="padding:12px;font-weight:700;color:#283551;font-size:0.88rem;">
               <span style="font-size:1.3rem;margin-right:8px;">🗻</span> Baja Verapaz
             </td>
             <td style="padding:12px;text-align:center;font-weight:700;font-size:1.1rem;color:#283551;" id="deptoBajaVerapaz">3</td>
             <td style="padding:12px;text-align:center;font-weight:800;color:#9c27b0;font-size:1rem;" id="deptoBajaVerapazPct">1.88%</td>
           </tr>
           <tr style="border-bottom:1px solid rgba(255,255,255,0.1);transition:background 0.2s;" onmouseover="this.style.background='rgba(0,150,136,0.1)'" onmouseout="this.style.background=''">
-            <td style="padding:12px;font-weight:700;color:#5dade2;font-size:0.88rem;">
+            <td style="padding:12px;font-weight:700;color:#283551;font-size:0.88rem;">
               <span style="font-size:1.3rem;margin-right:8px;">🌊</span> Retalhuleu
             </td>
             <td style="padding:12px;text-align:center;font-weight:700;font-size:1.1rem;color:#283551;" id="deptoRetalhuleu">2</td>
             <td style="padding:12px;text-align:center;font-weight:800;color:#009688;font-size:1rem;" id="deptoRetalhuleuPct">1.25%</td>
           </tr>
           <tr style="border-bottom:1px solid rgba(255,255,255,0.1);transition:background 0.2s;" onmouseover="this.style.background='rgba(233,30,99,0.1)'" onmouseout="this.style.background=''">
-            <td style="padding:12px;font-weight:700;color:#5dade2;font-size:0.88rem;">
+            <td style="padding:12px;font-weight:700;color:#283551;font-size:0.88rem;">
               <span style="font-size:1.3rem;margin-right:8px;">🌸</span> Santa Rosa
             </td>
             <td style="padding:12px;text-align:center;font-weight:700;font-size:1.1rem;color:#283551;" id="deptoSantaRosa">1</td>
             <td style="padding:12px;text-align:center;font-weight:800;color:#e91e63;font-size:1rem;" id="deptoSantaRosaPct">0.63%</td>
           </tr>
           <tr style="transition:background 0.2s;" onmouseover="this.style.background='rgba(96,125,139,0.1)'" onmouseout="this.style.background=''">
-            <td style="padding:12px;font-weight:700;color:#5dade2;font-size:0.88rem;">
+            <td style="padding:12px;font-weight:700;color:#283551;font-size:0.88rem;">
               <span style="font-size:1.3rem;margin-right:8px;">⛰️</span> Huehuetenango
             </td>
             <td style="padding:12px;text-align:center;font-weight:700;font-size:1.1rem;color:#283551;" id="deptoHuehuetenango">1</td>
@@ -1062,15 +1031,6 @@ function updateSegmento(mes) {
   
   document.getElementById('sinCasos').textContent = data.sin.casos + ' casos';
   document.getElementById('sinCapital').textContent = formatCapital(data.sin.capital);
-  
-  document.getElementById('adjudicacionCasos').textContent = data.adjudicacion.casos + ' casos';
-  document.getElementById('adjudicacionCapital').textContent = formatCapital(data.adjudicacion.capital);
-  
-  document.getElementById('reestructuraCasos').textContent = data.reestructura.casos + ' casos';
-  document.getElementById('reestructuraCapital').textContent = formatCapital(data.reestructura.capital);
-  
-  document.getElementById('trasladoCasos').textContent = data.traslado.casos + ' casos';
-  document.getElementById('trasladoCapital').textContent = formatCapital(data.traslado.capital);
 }
 
 document.querySelectorAll('.filter-btn-segmento').forEach(btn=>{
@@ -1212,6 +1172,11 @@ const avaluoPendData = {
     labels: ['2024', '2025', '2026'],
     casos: [17, 51, 3],
     capital: [980757.77, 4963683.73, 226108.80]
+  },
+  febrero: {
+    labels: ['2024', '2025', '2026'],
+    casos: [11, 12, 7],
+    capital: [680606.09, 844916.85, 586108.80]
   }
 };
 
@@ -1470,7 +1435,7 @@ function updateRangoDepto(periodo) {
   </tr>`;
   data.alDia.deptos.forEach(d => {
     html += `<tr style="border-bottom:1px solid rgba(255,255,255,0.04);transition:background 0.2s;" onmouseover="this.style.background='rgba(39,174,96,0.05)'" onmouseout="this.style.background=''">
-      <td style="padding:3px 3px 3px 15px;color:#aab8c2;font-size:0.58rem;">
+      <td style="padding:3px 3px 3px 15px;color:#000000;font-size:0.58rem;">
         <span style="font-size:0.7rem;margin-right:3px;">${d.emoji}</span> ${d.nombre}
       </td>
       <td style="padding:3px;text-align:center;color:#283551;font-size:0.62rem;font-weight:600;">${d.pct.toFixed(2)}%</td>
@@ -1486,7 +1451,7 @@ function updateRangoDepto(periodo) {
   </tr>`;
   data.r1a30.deptos.forEach(d => {
     html += `<tr style="border-bottom:1px solid rgba(255,255,255,0.04);transition:background 0.2s;" onmouseover="this.style.background='rgba(82,113,255,0.05)'" onmouseout="this.style.background=''">
-      <td style="padding:3px 3px 3px 15px;color:#aab8c2;font-size:0.58rem;">
+      <td style="padding:3px 3px 3px 15px;color:#000000;font-size:0.58rem;">
         <span style="font-size:0.7rem;margin-right:3px;">${d.emoji}</span> ${d.nombre}
       </td>
       <td style="padding:3px;text-align:center;color:#283551;font-size:0.62rem;font-weight:600;">${d.pct.toFixed(2)}%</td>
@@ -1502,7 +1467,7 @@ function updateRangoDepto(periodo) {
   </tr>`;
   data.r31a60.deptos.forEach(d => {
     html += `<tr style="border-bottom:1px solid rgba(255,255,255,0.04);transition:background 0.2s;" onmouseover="this.style.background='rgba(243,149,25,0.05)'" onmouseout="this.style.background=''">
-      <td style="padding:3px 3px 3px 15px;color:#aab8c2;font-size:0.58rem;">
+      <td style="padding:3px 3px 3px 15px;color:#000000;font-size:0.58rem;">
         <span style="font-size:0.7rem;margin-right:3px;">${d.emoji}</span> ${d.nombre}
       </td>
       <td style="padding:3px;text-align:center;color:#283551;font-size:0.62rem;font-weight:600;">${d.pct.toFixed(2)}%</td>
@@ -1518,7 +1483,7 @@ function updateRangoDepto(periodo) {
   </tr>`;
   data.r61a90.deptos.forEach(d => {
     html += `<tr style="border-bottom:1px solid rgba(255,255,255,0.04);transition:background 0.2s;" onmouseover="this.style.background='rgba(255,152,0,0.05)'" onmouseout="this.style.background=''">
-      <td style="padding:3px 3px 3px 15px;color:#aab8c2;font-size:0.58rem;">
+      <td style="padding:3px 3px 3px 15px;color:#000000;font-size:0.58rem;">
         <span style="font-size:0.7rem;margin-right:3px;">${d.emoji}</span> ${d.nombre}
       </td>
       <td style="padding:3px;text-align:center;color:#283551;font-size:0.62rem;font-weight:600;">${d.pct.toFixed(2)}%</td>
@@ -1534,7 +1499,7 @@ function updateRangoDepto(periodo) {
   </tr>`;
   data.prejuridico.deptos.forEach(d => {
     html += `<tr style="border-bottom:1px solid rgba(255,255,255,0.04);transition:background 0.2s;" onmouseover="this.style.background='rgba(231,76,60,0.05)'" onmouseout="this.style.background=''">
-      <td style="padding:3px 3px 3px 15px;color:#aab8c2;font-size:0.58rem;">
+      <td style="padding:3px 3px 3px 15px;color:#000000;font-size:0.58rem;">
         <span style="font-size:0.7rem;margin-right:3px;">${d.emoji}</span> ${d.nombre}
       </td>
       <td style="padding:3px;text-align:center;color:#283551;font-size:0.62rem;font-weight:600;">${d.pct.toFixed(2)}%</td>
@@ -1550,7 +1515,7 @@ function updateRangoDepto(periodo) {
   </tr>`;
   data.juridico.deptos.forEach(d => {
     html += `<tr style="border-bottom:1px solid rgba(255,255,255,0.04);transition:background 0.2s;" onmouseover="this.style.background='rgba(142,68,173,0.05)'" onmouseout="this.style.background=''">
-      <td style="padding:3px 3px 3px 15px;color:#aab8c2;font-size:0.58rem;">
+      <td style="padding:3px 3px 3px 15px;color:#000000;font-size:0.58rem;">
         <span style="font-size:0.7rem;margin-right:3px;">${d.emoji}</span> ${d.nombre}
       </td>
       <td style="padding:3px;text-align:center;color:#283551;font-size:0.62rem;font-weight:600;">${d.pct.toFixed(2)}%</td>
@@ -1656,59 +1621,35 @@ document.querySelectorAll('.filter-btn-depto').forEach(btn=>{
 const kpiData = {
   diciembre: {
     capitalLabel: 'Capital Total Diciembre 2025',
-    capital: 'Q 26,256,180',
+    capital: 'Q 13,492,367.62',
     capitalSub: 'Mes base',
     casos: '294',
     vigentes: '205',
-    vigentesPct: '69.7%',
-    destino: 'Consumo',
-    destinoPct: '55.8%',
-    destinoSub: '182 casos · Q 14,645,022',
-    segmento: '(en blanco)',
-    segmentoPct: '46.3%',
-    segmentoSub: '136 casos · mayor participación'
+    vigentesPct: '69.7%'
   },
   enero: {
     capitalLabel: 'Capital Total Enero 2026',
-    capital: 'Q 27,757,024',
+    capital: 'Q 14,264,656.76',
     capitalSub: '+5.7% vs mes anterior',
     casos: '307',
     vigentes: '215',
-    vigentesPct: '75.7%',
-    destino: 'Consumo',
-    destinoPct: '57.3%',
-    destinoSub: '196 casos · Q 15,894,570',
-    segmento: '(en blanco)',
-    segmentoPct: '48.6%',
-    segmentoSub: '150 casos · mayor participación'
+    vigentesPct: '75.7%'
   },
   febrero: {
     capitalLabel: 'Capital Total Febrero 2026',
-    capital: 'Q 29,102,345',
-    capitalSub: '+4.8% vs mes anterior',
+    capital: 'Q 14,469,451.25',
+    capitalSub: '+1.4% vs mes anterior',
     casos: '318',
     vigentes: '226',
-    vigentesPct: '71.1%',
-    destino: 'Consumo',
-    destinoPct: '58.5%',
-    destinoSub: '204 casos · Q 17,024,812',
-    segmento: '(en blanco)',
-    segmentoPct: '50.3%',
-    segmentoSub: '160 casos · mayor participación'
+    vigentesPct: '71.1%'
   },
   todos: {
     capitalLabel: 'Capital Total Acumulado',
-    capital: 'Q 83,115,549',
+    capital: 'Q 42,226,475.63',
     capitalSub: 'Diciembre 2025 → Febrero 2026',
     casos: '919',
     vigentes: '646',
-    vigentesPct: '70.3%',
-    destino: 'Consumo',
-    destinoPct: '57.2%',
-    destinoSub: '582 casos · Q 47,564,404',
-    segmento: '(en blanco)',
-    segmentoPct: '48.4%',
-    segmentoSub: '446 casos · mayor participación'
+    vigentesPct: '70.3%'
   }
 };
 
@@ -1736,12 +1677,6 @@ function updateKPIs(selectedMonths) {
     document.getElementById('kpiCasosValue').innerHTML = data.casos + ' <span>casos</span>';
     document.getElementById('kpiVigentesValue').textContent = data.vigentes + ' ';
     document.getElementById('kpiVigentesPct').textContent = data.vigentesPct;
-    document.getElementById('kpiDestinoValue').textContent = data.destino + ' ';
-    document.getElementById('kpiDestinoPct').textContent = data.destinoPct;
-    document.getElementById('kpiDestinoSub').textContent = data.destinoSub;
-    document.getElementById('kpiSegmentoValue').textContent = data.segmento + ' ';
-    document.getElementById('kpiSegmentoPct').textContent = data.segmentoPct;
-    document.getElementById('kpiSegmentoSub').textContent = data.segmentoSub;
   }
 }
 
